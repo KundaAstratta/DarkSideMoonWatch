@@ -1,0 +1,1225 @@
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 1; ]
+import Toybox.Application;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 2; ]
+import Toybox.Graphics;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 3; ]
+import Toybox.Lang;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 4; ]
+import Toybox.System;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 5; ]
+import Toybox.WatchUi;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 6; ]
+import Toybox.Time;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 7; ]
+import Toybox.Time.Gregorian;
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 9; ]
+class DarkSideMoonWatchView extends WatchUi.WatchFace{
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 9; ]
+    <init> {
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 11 8 ]
+        %tmp.2 = getv ? :Math;
+        %tmp.3 = getv %tmp.2 :PI;
+        %tmp.4 = 2;
+        %tmp.5 = mul %tmp.3 %tmp.4;
+        putv self :TWO_PI %tmp.5;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 13 8 ]
+        %tmp.7 = getv ? :Math;
+        %tmp.8 = getv %tmp.7 :PI;
+        %tmp.9 = 2.0;
+        %tmp.10 = div %tmp.8 %tmp.9;
+        putv self :ANGLE_ADJUST %tmp.10;
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 9; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 11; @position = 8; ]
+    var TWO_PI;
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 13; @position = 8; ]
+    var ANGLE_ADJUST;
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 15; ]
+    function initialize() as Void {
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_15_26_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 16 8 ]
+        %tmp.2 = getv ? :WatchFace;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_15_26_stop:
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 20; ]
+    function onLayout(dc as Dc) as Void {
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_20_40_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 21 8 ]
+        %tmp.1 = self;
+        %tmp.2 = getv function %tmp.1 :setLayout;
+        %tmp.4 = getv ? :Rez;
+        %tmp.5 = getv %tmp.4 :Layouts;
+        %tmp.6 = getv function %tmp.5 :WatchFace;
+        %tmp.8 = lgetv %dc;
+        %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+        invoke %tmp.1 %tmp.2(%tmp.9);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_20_40_stop:
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 27; ]
+    function onShow() as Void {
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 31; ]
+    function onUpdate(dc as Dc) as Void {
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 39 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %now.1 = local;
+        %tmp.1 = getm $.Toybox.System;
+        %tmp.2 = getv function %tmp.1 :getClockTime;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %now.1 %tmp.3;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 40 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %hour.2 = local;
+        %tmp.4 = lgetv %now.1;
+        %tmp.5 = getv %tmp.4 :hour;
+        lputv %hour.2 %tmp.5;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 41 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %min.3 = local;
+        %tmp.6 = lgetv %now.1;
+        %tmp.7 = getv %tmp.6 :min;
+        lputv %min.3 %tmp.7;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 42 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %sec.4 = local;
+        %tmp.8 = lgetv %now.1;
+        %tmp.9 = getv %tmp.8 :sec;
+        lputv %sec.4 %tmp.9;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 45 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %hour_fraction.5 = local;
+        %tmp.11 = lgetv %min.3;
+        %tmp.12 = 60.0;
+        %tmp.13 = div %tmp.11 %tmp.12;
+        lputv %hour_fraction.5 %tmp.13;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 46 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %minute_angle.6 = local;
+        %tmp.15 = lgetv %hour_fraction.5;
+        %tmp.17 = getv ? :TWO_PI;
+        %tmp.18 = mul %tmp.15 %tmp.17;
+        lputv %minute_angle.6 %tmp.18;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 47 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %hour_angle.7 = local;
+        %tmp.20 = lgetv %hour.2;
+        %tmp.21 = 12;
+        %tmp.22 = mod %tmp.20 %tmp.21;
+        %tmp.24 = lgetv %hour_fraction.5;
+        %tmp.25 = add %tmp.22 %tmp.24;
+        %tmp.26 = 12.0;
+        %tmp.27 = div %tmp.25 %tmp.26;
+        %tmp.29 = getv ? :TWO_PI;
+        %tmp.30 = mul %tmp.27 %tmp.29;
+        lputv %hour_angle.7 %tmp.30;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 48 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %seconde_angle.8 = local;
+        %tmp.32 = lgetv %sec.4;
+        %tmp.33 = 60.0;
+        %tmp.34 = div %tmp.32 %tmp.33;
+        %tmp.36 = getv ? :TWO_PI;
+        %tmp.37 = mul %tmp.34 %tmp.36;
+        lputv %seconde_angle.8 %tmp.37;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 51 8 ]
+        %tmp.38 = lgetv %minute_angle.6;
+        %tmp.40 = getv ? :ANGLE_ADJUST;
+        %tmp.41 = sub %tmp.38 %tmp.40;
+        lputv %minute_angle.6 %tmp.41;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 52 8 ]
+        %tmp.42 = lgetv %hour_angle.7;
+        %tmp.44 = getv ? :ANGLE_ADJUST;
+        %tmp.45 = sub %tmp.42 %tmp.44;
+        lputv %hour_angle.7 %tmp.45;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 53 8 ]
+        %tmp.46 = lgetv %seconde_angle.8;
+        %tmp.48 = getv ? :ANGLE_ADJUST;
+        %tmp.49 = sub %tmp.46 %tmp.48;
+        lputv %seconde_angle.8 %tmp.49;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 56 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %center_x.9 = local;
+        %tmp.50 = lgetv %dc;
+        %tmp.51 = getv function %tmp.50 :getWidth;
+        %tmp.52 = invoke %tmp.50 %tmp.51();
+        %tmp.53 = 2;
+        %tmp.54 = div %tmp.52 %tmp.53;
+        lputv %center_x.9 %tmp.54;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 57 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %center_y.10 = local;
+        %tmp.55 = lgetv %dc;
+        %tmp.56 = getv function %tmp.55 :getHeight;
+        %tmp.57 = invoke %tmp.55 %tmp.56();
+        %tmp.58 = 2;
+        %tmp.59 = div %tmp.57 %tmp.58;
+        lputv %center_y.10 %tmp.59;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 58 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %diameter.11 = local;
+        %tmp.60 = lgetv %dc;
+        %tmp.61 = getv function %tmp.60 :getWidth;
+        %tmp.62 = invoke %tmp.60 %tmp.61();
+        lputv %diameter.11 %tmp.62;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 59 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %radius.12 = local;
+        %tmp.64 = lgetv %diameter.11;
+        %tmp.65 = 2;
+        %tmp.66 = div %tmp.64 %tmp.65;
+        lputv %radius.12 %tmp.66;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 63 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %today.13 = local;
+        %tmp.67 = getm $.Toybox.Time.Gregorian;
+        %tmp.68 = getv function %tmp.67 :info;
+        %tmp.69 = getm $.Toybox.Time;
+        %tmp.70 = getv function %tmp.69 :now;
+        %tmp.71 = invoke %tmp.69 %tmp.70();
+        %tmp.72 = getm $.Toybox.Time;
+        %tmp.73 = getv %tmp.72 :FORMAT_SHORT;
+        %tmp.74 = invoke %tmp.67 %tmp.68(%tmp.71, %tmp.73);
+        lputv %today.13 %tmp.74;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 67 8 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop" ]
+        %moonNumber.14 = local;
+        %tmp.75 = self;
+        %tmp.76 = getv function %tmp.75 :getMoonPhase;
+        %tmp.77 = lgetv %today.13;
+        %tmp.78 = getv %tmp.77 :year;
+        %tmp.79 = lgetv %today.13;
+        %tmp.80 = getv %tmp.79 :month;
+        %tmp.81 = lgetv %today.13;
+        %tmp.82 = getv %tmp.81 :day;
+        %tmp.83 = invoke %tmp.75 %tmp.76(%tmp.78, %tmp.80, %tmp.82);
+        lputv %moonNumber.14 %tmp.83;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 71 8 ]
+        %tmp.85 = getv ? :View;
+        %tmp.86 = getv function %tmp.85 :onUpdate;
+        %tmp.88 = lgetv %dc;
+        invoke %tmp.85 %tmp.86(%tmp.88);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 95 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_8_if_stmt:
+        %tmp.89 = getm $.Toybox.System;
+        %tmp.90 = getv function %tmp.89 :getSystemStats;
+        %tmp.91 = invoke %tmp.89 %tmp.90();
+        %tmp.92 = getv %tmp.91 :battery;
+        %tmp.93 = 20;
+        %tmp.94 = gte %tmp.92 %tmp.93;
+        bf %tmp.94 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 98 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop" ]
+        %RedMoon.15 = local;
+        %tmp.95 = getm $.Toybox.WatchUi;
+        %tmp.96 = getv function %tmp.95 :loadResource;
+        %tmp.98 = getv ? :Rez;
+        %tmp.99 = getv %tmp.98 :Drawables;
+        %tmp.100 = getv %tmp.99 :redmoon;
+        %tmp.101 = invoke %tmp.95 %tmp.96(%tmp.100);
+        lputv %RedMoon.15 %tmp.101;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 99 12 ]
+        %tmp.102 = lgetv %dc;
+        %tmp.103 = getv function %tmp.102 :drawBitmap;
+        %tmp.105 = lgetv %center_x.9;
+        %tmp.107 = lgetv %center_y.10;
+        %tmp.109 = lgetv %RedMoon.15;
+        invoke %tmp.102 %tmp.103(%tmp.105, %tmp.107, %tmp.109);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 102 12 ]
+        %tmp.110 = self;
+        %tmp.111 = getv function %tmp.110 :showMoonPhase;
+        %tmp.113 = lgetv %moonNumber.14;
+        %tmp.115 = lgetv %dc;
+        %tmp.117 = lgetv %center_x.9;
+        %tmp.119 = lgetv %center_x.9;
+        %tmp.120 = 3;
+        %tmp.121 = div %tmp.119 %tmp.120;
+        %tmp.122 = add %tmp.117 %tmp.121;
+        %tmp.124 = lgetv %center_y.10;
+        %tmp.126 = lgetv %center_y.10;
+        %tmp.127 = 3;
+        %tmp.128 = div %tmp.126 %tmp.127;
+        %tmp.129 = add %tmp.124 %tmp.128;
+        invoke %tmp.110 %tmp.111(%tmp.113, %tmp.115, %tmp.122, %tmp.129);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 174 12 ]
+        %tmp.130 = lgetv %dc;
+        %tmp.131 = getv function %tmp.130 :setPenWidth;
+        %tmp.132 = 3;
+        invoke %tmp.130 %tmp.131(%tmp.132);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 175 12 ]
+        %tmp.133 = lgetv %dc;
+        %tmp.134 = getv function %tmp.133 :setColor;
+        %tmp.135 = getm $.Toybox.Graphics;
+        %tmp.136 = getv %tmp.135 :COLOR_WHITE;
+        %tmp.137 = getm $.Toybox.Graphics;
+        %tmp.138 = getv %tmp.137 :COLOR_TRANSPARENT;
+        invoke %tmp.133 %tmp.134(%tmp.136, %tmp.138);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 176 12 ]
+        %tmp.139 = lgetv %dc;
+        %tmp.140 = getv function %tmp.139 :drawArc;
+        %tmp.142 = lgetv %center_x.9;
+        %tmp.144 = lgetv %center_y.10;
+        %tmp.146 = lgetv %radius.12;
+        %tmp.147 = 0.74;
+        %tmp.148 = mul %tmp.146 %tmp.147;
+        %tmp.149 = getm $.Toybox.Graphics;
+        %tmp.150 = getv %tmp.149 :ARC_COUNTER_CLOCKWISE;
+        %tmp.151 = 60;
+        %tmp.152 = 120;
+        invoke %tmp.139 %tmp.140(%tmp.142, %tmp.144, %tmp.148, %tmp.150, %tmp.151, %tmp.152);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 177 12 ]
+        %tmp.153 = lgetv %dc;
+        %tmp.154 = getv function %tmp.153 :setColor;
+        %tmp.155 = getm $.Toybox.Graphics;
+        %tmp.156 = getv %tmp.155 :COLOR_WHITE;
+        %tmp.157 = getm $.Toybox.Graphics;
+        %tmp.158 = getv %tmp.157 :COLOR_TRANSPARENT;
+        invoke %tmp.153 %tmp.154(%tmp.156, %tmp.158);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 178 12 ]
+        %tmp.159 = lgetv %dc;
+        %tmp.160 = getv function %tmp.159 :drawArc;
+        %tmp.162 = lgetv %center_x.9;
+        %tmp.164 = lgetv %center_y.10;
+        %tmp.166 = lgetv %radius.12;
+        %tmp.167 = 0.77;
+        %tmp.168 = mul %tmp.166 %tmp.167;
+        %tmp.169 = getm $.Toybox.Graphics;
+        %tmp.170 = getv %tmp.169 :ARC_COUNTER_CLOCKWISE;
+        %tmp.171 = 70;
+        %tmp.172 = 110;
+        invoke %tmp.159 %tmp.160(%tmp.162, %tmp.164, %tmp.168, %tmp.170, %tmp.171, %tmp.172);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 181 12 ]
+        %tmp.173 = lgetv %dc;
+        %tmp.174 = getv function %tmp.173 :setPenWidth;
+        %tmp.175 = 3;
+        invoke %tmp.173 %tmp.174(%tmp.175);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 182 12 ]
+        %tmp.176 = lgetv %dc;
+        %tmp.177 = getv function %tmp.176 :setColor;
+        %tmp.178 = getm $.Toybox.Graphics;
+        %tmp.179 = getv %tmp.178 :COLOR_WHITE;
+        %tmp.180 = getm $.Toybox.Graphics;
+        %tmp.181 = getv %tmp.180 :COLOR_TRANSPARENT;
+        invoke %tmp.176 %tmp.177(%tmp.179, %tmp.181);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 183 12 ]
+        %tmp.182 = lgetv %dc;
+        %tmp.183 = getv function %tmp.182 :drawArc;
+        %tmp.185 = lgetv %center_x.9;
+        %tmp.187 = lgetv %center_y.10;
+        %tmp.189 = lgetv %radius.12;
+        %tmp.190 = 0.8;
+        %tmp.191 = mul %tmp.189 %tmp.190;
+        %tmp.192 = getm $.Toybox.Graphics;
+        %tmp.193 = getv %tmp.192 :ARC_COUNTER_CLOCKWISE;
+        %tmp.194 = 150;
+        %tmp.195 = 210;
+        invoke %tmp.182 %tmp.183(%tmp.185, %tmp.187, %tmp.191, %tmp.193, %tmp.194, %tmp.195);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 186 12 ]
+        %tmp.196 = lgetv %dc;
+        %tmp.197 = getv function %tmp.196 :setPenWidth;
+        %tmp.198 = 3;
+        invoke %tmp.196 %tmp.197(%tmp.198);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 187 12 ]
+        %tmp.199 = lgetv %dc;
+        %tmp.200 = getv function %tmp.199 :setColor;
+        %tmp.201 = getm $.Toybox.Graphics;
+        %tmp.202 = getv %tmp.201 :COLOR_WHITE;
+        %tmp.203 = getm $.Toybox.Graphics;
+        %tmp.204 = getv %tmp.203 :COLOR_TRANSPARENT;
+        invoke %tmp.199 %tmp.200(%tmp.202, %tmp.204);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 188 12 ]
+        %tmp.205 = lgetv %dc;
+        %tmp.206 = getv function %tmp.205 :drawArc;
+        %tmp.208 = lgetv %center_x.9;
+        %tmp.210 = lgetv %center_y.10;
+        %tmp.212 = lgetv %radius.12;
+        %tmp.213 = 0.8;
+        %tmp.214 = mul %tmp.212 %tmp.213;
+        %tmp.215 = getm $.Toybox.Graphics;
+        %tmp.216 = getv %tmp.215 :ARC_COUNTER_CLOCKWISE;
+        %tmp.217 = -30;
+        %tmp.218 = 30;
+        invoke %tmp.205 %tmp.206(%tmp.208, %tmp.210, %tmp.214, %tmp.216, %tmp.217, %tmp.218);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 192 12 ]
+        %tmp.219 = lgetv %dc;
+        %tmp.220 = getv function %tmp.219 :setPenWidth;
+        %tmp.221 = 3;
+        invoke %tmp.219 %tmp.220(%tmp.221);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 193 12 ]
+        %tmp.222 = lgetv %dc;
+        %tmp.223 = getv function %tmp.222 :setColor;
+        %tmp.224 = getm $.Toybox.Graphics;
+        %tmp.225 = getv %tmp.224 :COLOR_WHITE;
+        %tmp.226 = getm $.Toybox.Graphics;
+        %tmp.227 = getv %tmp.226 :COLOR_TRANSPARENT;
+        invoke %tmp.222 %tmp.223(%tmp.225, %tmp.227);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 194 12 ]
+        %tmp.228 = lgetv %dc;
+        %tmp.229 = getv function %tmp.228 :drawArc;
+        %tmp.231 = lgetv %center_x.9;
+        %tmp.233 = lgetv %center_y.10;
+        %tmp.235 = lgetv %radius.12;
+        %tmp.236 = 0.74;
+        %tmp.237 = mul %tmp.235 %tmp.236;
+        %tmp.238 = getm $.Toybox.Graphics;
+        %tmp.239 = getv %tmp.238 :ARC_COUNTER_CLOCKWISE;
+        %tmp.240 = 240;
+        %tmp.241 = 300;
+        invoke %tmp.228 %tmp.229(%tmp.231, %tmp.233, %tmp.237, %tmp.239, %tmp.240, %tmp.241);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 195 12 ]
+        %tmp.242 = lgetv %dc;
+        %tmp.243 = getv function %tmp.242 :setColor;
+        %tmp.244 = getm $.Toybox.Graphics;
+        %tmp.245 = getv %tmp.244 :COLOR_WHITE;
+        %tmp.246 = getm $.Toybox.Graphics;
+        %tmp.247 = getv %tmp.246 :COLOR_TRANSPARENT;
+        invoke %tmp.242 %tmp.243(%tmp.245, %tmp.247);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 196 12 ]
+        %tmp.248 = lgetv %dc;
+        %tmp.249 = getv function %tmp.248 :drawArc;
+        %tmp.251 = lgetv %center_x.9;
+        %tmp.253 = lgetv %center_y.10;
+        %tmp.255 = lgetv %radius.12;
+        %tmp.256 = 0.77;
+        %tmp.257 = mul %tmp.255 %tmp.256;
+        %tmp.258 = getm $.Toybox.Graphics;
+        %tmp.259 = getv %tmp.258 :ARC_COUNTER_CLOCKWISE;
+        %tmp.260 = 250;
+        %tmp.261 = 290;
+        invoke %tmp.248 %tmp.249(%tmp.251, %tmp.253, %tmp.257, %tmp.259, %tmp.260, %tmp.261);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 199 12 ]
+        %tmp.262 = lgetv %dc;
+        %tmp.263 = getv function %tmp.262 :setColor;
+        %tmp.264 = getm $.Toybox.Graphics;
+        %tmp.265 = getv %tmp.264 :COLOR_WHITE;
+        %tmp.266 = getm $.Toybox.Graphics;
+        %tmp.267 = getv %tmp.266 :COLOR_TRANSPARENT;
+        invoke %tmp.262 %tmp.263(%tmp.265, %tmp.267);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 200 12 ]
+        %tmp.268 = lgetv %dc;
+        %tmp.269 = getv function %tmp.268 :drawText;
+        %tmp.271 = lgetv %center_x.9;
+        %tmp.273 = lgetv %center_y.10;
+        %tmp.275 = lgetv %radius.12;
+        %tmp.276 = sub %tmp.273 %tmp.275;
+        %tmp.277 = getm $.Toybox.Graphics;
+        %tmp.278 = getv %tmp.277 :FONT_SYSTEM_MEDIUM;
+        %tmp.279 = "12";
+        %tmp.280 = getm $.Toybox.Graphics;
+        %tmp.281 = getv %tmp.280 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.268 %tmp.269(%tmp.271, %tmp.276, %tmp.278, %tmp.279, %tmp.281);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 201 12 ]
+        %tmp.282 = lgetv %dc;
+        %tmp.283 = getv function %tmp.282 :drawText;
+        %tmp.285 = lgetv %center_x.9;
+        %tmp.287 = lgetv %center_y.10;
+        %tmp.289 = lgetv %radius.12;
+        %tmp.290 = 0.75;
+        %tmp.291 = mul %tmp.289 %tmp.290;
+        %tmp.292 = add %tmp.287 %tmp.291;
+        %tmp.293 = getm $.Toybox.Graphics;
+        %tmp.294 = getv %tmp.293 :FONT_SYSTEM_MEDIUM;
+        %tmp.295 = "6";
+        %tmp.296 = getm $.Toybox.Graphics;
+        %tmp.297 = getv %tmp.296 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.282 %tmp.283(%tmp.285, %tmp.292, %tmp.294, %tmp.295, %tmp.297);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 202 12 ]
+        %tmp.298 = lgetv %dc;
+        %tmp.299 = getv function %tmp.298 :drawText;
+        %tmp.301 = lgetv %center_x.9;
+        %tmp.303 = lgetv %radius.12;
+        %tmp.304 = 0.93;
+        %tmp.305 = mul %tmp.303 %tmp.304;
+        %tmp.306 = sub %tmp.301 %tmp.305;
+        %tmp.308 = lgetv %center_y.10;
+        %tmp.310 = lgetv %radius.12;
+        %tmp.311 = 0.12;
+        %tmp.312 = mul %tmp.310 %tmp.311;
+        %tmp.313 = sub %tmp.308 %tmp.312;
+        %tmp.314 = getm $.Toybox.Graphics;
+        %tmp.315 = getv %tmp.314 :FONT_SYSTEM_MEDIUM;
+        %tmp.316 = "9";
+        %tmp.317 = getm $.Toybox.Graphics;
+        %tmp.318 = getv %tmp.317 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.298 %tmp.299(%tmp.306, %tmp.313, %tmp.315, %tmp.316, %tmp.318);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 203 12 ]
+        %tmp.319 = lgetv %dc;
+        %tmp.320 = getv function %tmp.319 :drawText;
+        %tmp.322 = lgetv %center_x.9;
+        %tmp.324 = lgetv %radius.12;
+        %tmp.325 = 0.93;
+        %tmp.326 = mul %tmp.324 %tmp.325;
+        %tmp.327 = add %tmp.322 %tmp.326;
+        %tmp.329 = lgetv %center_y.10;
+        %tmp.331 = lgetv %radius.12;
+        %tmp.332 = 0.12;
+        %tmp.333 = mul %tmp.331 %tmp.332;
+        %tmp.334 = sub %tmp.329 %tmp.333;
+        %tmp.335 = getm $.Toybox.Graphics;
+        %tmp.336 = getv %tmp.335 :FONT_SYSTEM_MEDIUM;
+        %tmp.337 = "3";
+        %tmp.338 = getm $.Toybox.Graphics;
+        %tmp.339 = getv %tmp.338 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.319 %tmp.320(%tmp.327, %tmp.334, %tmp.336, %tmp.337, %tmp.339);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 207 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop" ]
+        %secArc.16 = local;
+        %tmp.341 = lgetv %sec.4;
+        %tmp.342 = 60.0;
+        %tmp.343 = div %tmp.341 %tmp.342;
+        %tmp.344 = 60.0;
+        %tmp.345 = mul %tmp.343 %tmp.344;
+        lputv %secArc.16 %tmp.345;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 208 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop" ]
+        %drawSecArc.17 = local;
+        %tmp.346 = -30;
+        %tmp.348 = lgetv %secArc.16;
+        %tmp.349 = add %tmp.346 %tmp.348;
+        lputv %drawSecArc.17 %tmp.349;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 209 12 ]
+        %tmp.350 = lgetv %dc;
+        %tmp.351 = getv function %tmp.350 :setPenWidth;
+        %tmp.352 = 5;
+        invoke %tmp.350 %tmp.351(%tmp.352);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 210 12 ]
+        %tmp.353 = lgetv %dc;
+        %tmp.354 = getv function %tmp.353 :setColor;
+        %tmp.355 = getm $.Toybox.Graphics;
+        %tmp.356 = getv %tmp.355 :COLOR_RED;
+        %tmp.357 = getm $.Toybox.Graphics;
+        %tmp.358 = getv %tmp.357 :COLOR_RED;
+        invoke %tmp.353 %tmp.354(%tmp.356, %tmp.358);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 211 12 ]
+        %tmp.359 = lgetv %dc;
+        %tmp.360 = getv function %tmp.359 :drawArc;
+        %tmp.362 = lgetv %center_x.9;
+        %tmp.364 = lgetv %center_y.10;
+        %tmp.366 = lgetv %radius.12;
+        %tmp.367 = 0.8;
+        %tmp.368 = mul %tmp.366 %tmp.367;
+        %tmp.369 = getm $.Toybox.Graphics;
+        %tmp.370 = getv %tmp.369 :ARC_COUNTER_CLOCKWISE;
+        %tmp.372 = lgetv %drawSecArc.17;
+        %tmp.373 = 30;
+        invoke %tmp.359 %tmp.360(%tmp.362, %tmp.364, %tmp.368, %tmp.370, %tmp.372, %tmp.373);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 213 12 ]
+        %tmp.374 = lgetv %dc;
+        %tmp.375 = getv function %tmp.374 :setColor;
+        %tmp.376 = getm $.Toybox.Graphics;
+        %tmp.377 = getv %tmp.376 :COLOR_WHITE;
+        %tmp.378 = getm $.Toybox.Graphics;
+        %tmp.379 = getv %tmp.378 :COLOR_TRANSPARENT;
+        invoke %tmp.374 %tmp.375(%tmp.377, %tmp.379);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 214 12 ]
+        %tmp.380 = lgetv %dc;
+        %tmp.381 = getv function %tmp.380 :drawText;
+        %tmp.383 = lgetv %center_x.9;
+        %tmp.385 = lgetv %radius.12;
+        %tmp.386 = 0.65;
+        %tmp.387 = mul %tmp.385 %tmp.386;
+        %tmp.388 = add %tmp.383 %tmp.387;
+        %tmp.390 = lgetv %center_y.10;
+        %tmp.391 = getm $.Toybox.Graphics;
+        %tmp.392 = getv %tmp.391 :FONT_SYSTEM_XTINY;
+        %tmp.394 = lgetv %sec.4;
+        %tmp.395 = "s";
+        %tmp.396 = add %tmp.394 %tmp.395;
+        %tmp.397 = getm $.Toybox.Graphics;
+        %tmp.398 = getv %tmp.397 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.380 %tmp.381(%tmp.388, %tmp.390, %tmp.392, %tmp.396, %tmp.398);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 218 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop" ]
+        %battery.18 = local;
+        %tmp.399 = getm $.Toybox.System;
+        %tmp.400 = getv function %tmp.399 :getSystemStats;
+        %tmp.401 = invoke %tmp.399 %tmp.400();
+        %tmp.402 = getv %tmp.401 :battery;
+        %tmp.403 = 100.0;
+        %tmp.404 = div %tmp.402 %tmp.403;
+        %tmp.405 = 60.0;
+        %tmp.406 = mul %tmp.404 %tmp.405;
+        lputv %battery.18 %tmp.406;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 219 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop" ]
+        %drawBattery.19 = local;
+        %tmp.407 = 150;
+        %tmp.409 = lgetv %battery.18;
+        %tmp.410 = add %tmp.407 %tmp.409;
+        lputv %drawBattery.19 %tmp.410;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 220 12 ]
+        %tmp.411 = lgetv %dc;
+        %tmp.412 = getv function %tmp.411 :setPenWidth;
+        %tmp.413 = 5;
+        invoke %tmp.411 %tmp.412(%tmp.413);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 221 12 ]
+        %tmp.414 = lgetv %dc;
+        %tmp.415 = getv function %tmp.414 :setColor;
+        %tmp.416 = getm $.Toybox.Graphics;
+        %tmp.417 = getv %tmp.416 :COLOR_RED;
+        %tmp.418 = getm $.Toybox.Graphics;
+        %tmp.419 = getv %tmp.418 :COLOR_RED;
+        invoke %tmp.414 %tmp.415(%tmp.417, %tmp.419);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 222 12 ]
+        %tmp.420 = lgetv %dc;
+        %tmp.421 = getv function %tmp.420 :drawArc;
+        %tmp.423 = lgetv %center_x.9;
+        %tmp.425 = lgetv %center_y.10;
+        %tmp.427 = lgetv %radius.12;
+        %tmp.428 = 0.8;
+        %tmp.429 = mul %tmp.427 %tmp.428;
+        %tmp.430 = getm $.Toybox.Graphics;
+        %tmp.431 = getv %tmp.430 :ARC_COUNTER_CLOCKWISE;
+        %tmp.433 = lgetv %drawBattery.19;
+        %tmp.434 = 210;
+        invoke %tmp.420 %tmp.421(%tmp.423, %tmp.425, %tmp.429, %tmp.431, %tmp.433, %tmp.434);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 224 12 ]
+        %tmp.435 = lgetv %dc;
+        %tmp.436 = getv function %tmp.435 :setColor;
+        %tmp.437 = getm $.Toybox.Graphics;
+        %tmp.438 = getv %tmp.437 :COLOR_WHITE;
+        %tmp.439 = getm $.Toybox.Graphics;
+        %tmp.440 = getv %tmp.439 :COLOR_TRANSPARENT;
+        invoke %tmp.435 %tmp.436(%tmp.438, %tmp.440);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 225 12 ]
+        %tmp.441 = lgetv %dc;
+        %tmp.442 = getv function %tmp.441 :drawText;
+        %tmp.444 = lgetv %center_x.9;
+        %tmp.446 = lgetv %radius.12;
+        %tmp.447 = 0.65;
+        %tmp.448 = mul %tmp.446 %tmp.447;
+        %tmp.449 = sub %tmp.444 %tmp.448;
+        %tmp.451 = lgetv %center_y.10;
+        %tmp.452 = getm $.Toybox.Graphics;
+        %tmp.453 = getv %tmp.452 :FONT_SYSTEM_XTINY;
+        %tmp.454 = getm $.Toybox.System;
+        %tmp.455 = getv function %tmp.454 :getSystemStats;
+        %tmp.456 = invoke %tmp.454 %tmp.455();
+        %tmp.457 = getv %tmp.456 :battery;
+        %tmp.458 = getv function %tmp.457 :toNumber;
+        %tmp.459 = invoke %tmp.457 %tmp.458();
+        %tmp.460 = "%";
+        %tmp.461 = add %tmp.459 %tmp.460;
+        %tmp.462 = getm $.Toybox.Graphics;
+        %tmp.463 = getv %tmp.462 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.441 %tmp.442(%tmp.449, %tmp.451, %tmp.453, %tmp.461, %tmp.463);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 228 12 ]
+        %tmp.464 = lgetv %dc;
+        %tmp.465 = getv function %tmp.464 :setColor;
+        %tmp.466 = getm $.Toybox.Graphics;
+        %tmp.467 = getv %tmp.466 :COLOR_RED;
+        %tmp.468 = getm $.Toybox.Graphics;
+        %tmp.469 = getv %tmp.468 :COLOR_TRANSPARENT;
+        invoke %tmp.464 %tmp.465(%tmp.467, %tmp.469);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 229 12 ]
+        %tmp.470 = lgetv %dc;
+        %tmp.471 = getv function %tmp.470 :setPenWidth;
+        %tmp.472 = 4;
+        invoke %tmp.470 %tmp.471(%tmp.472);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 230 12 ]
+        %tmp.473 = lgetv %dc;
+        %tmp.474 = getv function %tmp.473 :drawLine;
+        %tmp.476 = lgetv %center_x.9;
+        %tmp.478 = lgetv %radius.12;
+        %tmp.479 = 0.20;
+        %tmp.480 = mul %tmp.478 %tmp.479;
+        %tmp.482 = getv ? :Math;
+        %tmp.483 = getv function %tmp.482 :cos;
+        %tmp.485 = lgetv %hour_angle.7;
+        %tmp.486 = invoke %tmp.482 %tmp.483(%tmp.485);
+        %tmp.487 = mul %tmp.480 %tmp.486;
+        %tmp.488 = add %tmp.476 %tmp.487;
+        %tmp.490 = lgetv %center_y.10;
+        %tmp.492 = lgetv %radius.12;
+        %tmp.493 = 0.20;
+        %tmp.494 = mul %tmp.492 %tmp.493;
+        %tmp.496 = getv ? :Math;
+        %tmp.497 = getv function %tmp.496 :sin;
+        %tmp.499 = lgetv %hour_angle.7;
+        %tmp.500 = invoke %tmp.496 %tmp.497(%tmp.499);
+        %tmp.501 = mul %tmp.494 %tmp.500;
+        %tmp.502 = add %tmp.490 %tmp.501;
+        %tmp.504 = lgetv %center_x.9;
+        %tmp.506 = lgetv %radius.12;
+        %tmp.507 = 0.72;
+        %tmp.508 = mul %tmp.506 %tmp.507;
+        %tmp.510 = getv ? :Math;
+        %tmp.511 = getv function %tmp.510 :cos;
+        %tmp.513 = lgetv %hour_angle.7;
+        %tmp.514 = invoke %tmp.510 %tmp.511(%tmp.513);
+        %tmp.515 = mul %tmp.508 %tmp.514;
+        %tmp.516 = add %tmp.504 %tmp.515;
+        %tmp.518 = lgetv %center_y.10;
+        %tmp.520 = lgetv %radius.12;
+        %tmp.521 = 0.72;
+        %tmp.522 = mul %tmp.520 %tmp.521;
+        %tmp.524 = getv ? :Math;
+        %tmp.525 = getv function %tmp.524 :sin;
+        %tmp.527 = lgetv %hour_angle.7;
+        %tmp.528 = invoke %tmp.524 %tmp.525(%tmp.527);
+        %tmp.529 = mul %tmp.522 %tmp.528;
+        %tmp.530 = add %tmp.518 %tmp.529;
+        invoke %tmp.473 %tmp.474(%tmp.488, %tmp.502, %tmp.516, %tmp.530);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 238 12 ]
+        %tmp.531 = lgetv %dc;
+        %tmp.532 = getv function %tmp.531 :setColor;
+        %tmp.533 = getm $.Toybox.Graphics;
+        %tmp.534 = getv %tmp.533 :COLOR_RED;
+        %tmp.535 = getm $.Toybox.Graphics;
+        %tmp.536 = getv %tmp.535 :COLOR_TRANSPARENT;
+        invoke %tmp.531 %tmp.532(%tmp.534, %tmp.536);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 239 12 ]
+        %tmp.537 = lgetv %dc;
+        %tmp.538 = getv function %tmp.537 :setPenWidth;
+        %tmp.539 = 4;
+        invoke %tmp.537 %tmp.538(%tmp.539);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 240 12 ]
+        %tmp.540 = lgetv %dc;
+        %tmp.541 = getv function %tmp.540 :drawLine;
+        %tmp.543 = lgetv %center_x.9;
+        %tmp.545 = lgetv %radius.12;
+        %tmp.546 = 0.20;
+        %tmp.547 = mul %tmp.545 %tmp.546;
+        %tmp.549 = getv ? :Math;
+        %tmp.550 = getv function %tmp.549 :cos;
+        %tmp.552 = lgetv %minute_angle.6;
+        %tmp.553 = invoke %tmp.549 %tmp.550(%tmp.552);
+        %tmp.554 = mul %tmp.547 %tmp.553;
+        %tmp.555 = add %tmp.543 %tmp.554;
+        %tmp.557 = lgetv %center_y.10;
+        %tmp.559 = lgetv %radius.12;
+        %tmp.560 = 0.20;
+        %tmp.561 = mul %tmp.559 %tmp.560;
+        %tmp.563 = getv ? :Math;
+        %tmp.564 = getv function %tmp.563 :sin;
+        %tmp.566 = lgetv %minute_angle.6;
+        %tmp.567 = invoke %tmp.563 %tmp.564(%tmp.566);
+        %tmp.568 = mul %tmp.561 %tmp.567;
+        %tmp.569 = add %tmp.557 %tmp.568;
+        %tmp.571 = lgetv %center_x.9;
+        %tmp.573 = lgetv %radius.12;
+        %tmp.574 = 0.90;
+        %tmp.575 = mul %tmp.573 %tmp.574;
+        %tmp.577 = getv ? :Math;
+        %tmp.578 = getv function %tmp.577 :cos;
+        %tmp.580 = lgetv %minute_angle.6;
+        %tmp.581 = invoke %tmp.577 %tmp.578(%tmp.580);
+        %tmp.582 = mul %tmp.575 %tmp.581;
+        %tmp.583 = add %tmp.571 %tmp.582;
+        %tmp.585 = lgetv %center_y.10;
+        %tmp.587 = lgetv %radius.12;
+        %tmp.588 = 0.90;
+        %tmp.589 = mul %tmp.587 %tmp.588;
+        %tmp.591 = getv ? :Math;
+        %tmp.592 = getv function %tmp.591 :sin;
+        %tmp.594 = lgetv %minute_angle.6;
+        %tmp.595 = invoke %tmp.591 %tmp.592(%tmp.594);
+        %tmp.596 = mul %tmp.589 %tmp.595;
+        %tmp.597 = add %tmp.585 %tmp.596;
+        invoke %tmp.540 %tmp.541(%tmp.555, %tmp.569, %tmp.583, %tmp.597);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_53_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_95_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 248 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_8_if_stmt:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_12_begin:
+        %tmp.598 = getm $.Toybox.System;
+        %tmp.599 = getv function %tmp.598 :getSystemStats;
+        %tmp.600 = invoke %tmp.598 %tmp.599();
+        %tmp.601 = getv %tmp.600 :battery;
+        %tmp.602 = 20;
+        %tmp.603 = lt %tmp.601 %tmp.602;
+        %tmp.604 = dup %tmp.603;
+        bf %tmp.604 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_54_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_54_true:
+        %tmp.605 = getm $.Toybox.System;
+        %tmp.606 = getv function %tmp.605 :getSystemStats;
+        %tmp.607 = invoke %tmp.605 %tmp.606();
+        %tmp.608 = getv %tmp.607 :battery;
+        %tmp.609 = 10;
+        %tmp.610 = gt %tmp.608 %tmp.609;
+        %tmp.611 = and %tmp.603 %tmp.610;
+        push %tmp.611;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_54_end:
+        %tmp.612 = phi [%tmp.604 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_12_begin] [%tmp.611 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_54_true] [%tmp.612 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_54_end];
+        bf %tmp.612 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_95_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 249 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_95_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_95_stop" ]
+        %blackhole.20 = local;
+        %tmp.613 = getm $.Toybox.WatchUi;
+        %tmp.614 = getv function %tmp.613 :loadResource;
+        %tmp.616 = getv ? :Rez;
+        %tmp.617 = getv %tmp.616 :Drawables;
+        %tmp.618 = getv %tmp.617 :blackhole;
+        %tmp.619 = invoke %tmp.613 %tmp.614(%tmp.618);
+        lputv %blackhole.20 %tmp.619;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 250 12 ]
+        %tmp.620 = lgetv %dc;
+        %tmp.621 = getv function %tmp.620 :drawBitmap;
+        %tmp.623 = lgetv %center_x.9;
+        %tmp.625 = lgetv %radius.12;
+        %tmp.626 = sub %tmp.623 %tmp.625;
+        %tmp.628 = lgetv %center_y.10;
+        %tmp.630 = lgetv %radius.12;
+        %tmp.631 = sub %tmp.628 %tmp.630;
+        %tmp.633 = lgetv %blackhole.20;
+        invoke %tmp.620 %tmp.621(%tmp.626, %tmp.631, %tmp.633);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 252 12 ]
+        %tmp.634 = lgetv %dc;
+        %tmp.635 = getv function %tmp.634 :setColor;
+        %tmp.636 = getm $.Toybox.Graphics;
+        %tmp.637 = getv %tmp.636 :COLOR_RED;
+        %tmp.638 = getm $.Toybox.Graphics;
+        %tmp.639 = getv %tmp.638 :COLOR_TRANSPARENT;
+        invoke %tmp.634 %tmp.635(%tmp.637, %tmp.639);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 253 12 ]
+        %tmp.640 = lgetv %dc;
+        %tmp.641 = getv function %tmp.640 :drawText;
+        %tmp.643 = lgetv %center_x.9;
+        %tmp.645 = lgetv %center_y.10;
+        %tmp.646 = getm $.Toybox.Graphics;
+        %tmp.647 = getv %tmp.646 :FONT_SYSTEM_MEDIUM;
+        %tmp.648 = lgetv %hour.2;
+        %tmp.649 = getv function %tmp.648 :format;
+        %tmp.650 = "%02d";
+        %tmp.651 = invoke %tmp.648 %tmp.649(%tmp.650);
+        %tmp.652 = ":";
+        %tmp.653 = add %tmp.651 %tmp.652;
+        %tmp.654 = lgetv %min.3;
+        %tmp.655 = getv function %tmp.654 :format;
+        %tmp.656 = "%02d";
+        %tmp.657 = invoke %tmp.654 %tmp.655(%tmp.656);
+        %tmp.658 = add %tmp.653 %tmp.657;
+        %tmp.659 = getm $.Toybox.Graphics;
+        %tmp.660 = getv %tmp.659 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.640 %tmp.641(%tmp.643, %tmp.645, %tmp.647, %tmp.658, %tmp.660);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_95_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_248_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 256 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_8_if_stmt:
+        %tmp.661 = getm $.Toybox.System;
+        %tmp.662 = getv function %tmp.661 :getSystemStats;
+        %tmp.663 = invoke %tmp.661 %tmp.662();
+        %tmp.664 = getv %tmp.663 :battery;
+        %tmp.665 = 10;
+        %tmp.666 = lte %tmp.664 %tmp.665;
+        bf %tmp.666 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_53_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 257 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_53_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_53_stop" ]
+        %creature.21 = local;
+        %tmp.667 = getm $.Toybox.WatchUi;
+        %tmp.668 = getv function %tmp.667 :loadResource;
+        %tmp.670 = getv ? :Rez;
+        %tmp.671 = getv %tmp.670 :Drawables;
+        %tmp.672 = getv %tmp.671 :creature;
+        %tmp.673 = invoke %tmp.667 %tmp.668(%tmp.672);
+        lputv %creature.21 %tmp.673;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 258 12 ]
+        %tmp.674 = lgetv %dc;
+        %tmp.675 = getv function %tmp.674 :drawBitmap;
+        %tmp.677 = lgetv %center_x.9;
+        %tmp.679 = lgetv %radius.12;
+        %tmp.680 = sub %tmp.677 %tmp.679;
+        %tmp.682 = lgetv %center_y.10;
+        %tmp.684 = lgetv %radius.12;
+        %tmp.685 = sub %tmp.682 %tmp.684;
+        %tmp.687 = lgetv %creature.21;
+        invoke %tmp.674 %tmp.675(%tmp.680, %tmp.685, %tmp.687);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 260 12 ]
+        %tmp.688 = lgetv %dc;
+        %tmp.689 = getv function %tmp.688 :setColor;
+        %tmp.690 = getm $.Toybox.Graphics;
+        %tmp.691 = getv %tmp.690 :COLOR_RED;
+        %tmp.692 = getm $.Toybox.Graphics;
+        %tmp.693 = getv %tmp.692 :COLOR_TRANSPARENT;
+        invoke %tmp.688 %tmp.689(%tmp.691, %tmp.693);
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 261 12 ]
+        %tmp.694 = lgetv %dc;
+        %tmp.695 = getv function %tmp.694 :drawText;
+        %tmp.697 = lgetv %center_x.9;
+        %tmp.699 = lgetv %center_y.10;
+        %tmp.700 = getm $.Toybox.Graphics;
+        %tmp.701 = getv %tmp.700 :FONT_SYSTEM_MEDIUM;
+        %tmp.702 = lgetv %hour.2;
+        %tmp.703 = getv function %tmp.702 :format;
+        %tmp.704 = "%02d";
+        %tmp.705 = invoke %tmp.702 %tmp.703(%tmp.704);
+        %tmp.706 = ":";
+        %tmp.707 = add %tmp.705 %tmp.706;
+        %tmp.708 = lgetv %min.3;
+        %tmp.709 = getv function %tmp.708 :format;
+        %tmp.710 = "%02d";
+        %tmp.711 = invoke %tmp.708 %tmp.709(%tmp.710);
+        %tmp.712 = add %tmp.707 %tmp.711;
+        %tmp.713 = getm $.Toybox.Graphics;
+        %tmp.714 = getv %tmp.713 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.694 %tmp.695(%tmp.697, %tmp.699, %tmp.701, %tmp.712, %tmp.714);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_53_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_256_8_if_end:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_31_40_stop:
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 269; ]
+    function onHide() as Void {
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 273; ]
+    function onExitSleep() as Void {
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 277; ]
+    function onEnterSleep() as Void {
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 280; ]
+    function showMoonPhase(moonNumber, dc, x, y) {
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_280_46_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 281 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_8_if_stmt:
+        %tmp.2 = lgetv %moonNumber;
+        %tmp.3 = 0;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 282 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_29_stop" ]
+        %newMoon.1 = local;
+        %tmp.5 = getm $.Toybox.WatchUi;
+        %tmp.6 = getv function %tmp.5 :loadResource;
+        %tmp.8 = getv ? :Rez;
+        %tmp.9 = getv %tmp.8 :Drawables;
+        %tmp.10 = getv %tmp.9 :newMoon;
+        %tmp.11 = invoke %tmp.5 %tmp.6(%tmp.10);
+        lputv %newMoon.1 %tmp.11;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 283 12 ]
+        %tmp.12 = lgetv %dc;
+        %tmp.13 = getv function %tmp.12 :drawBitmap;
+        %tmp.15 = lgetv %x;
+        %tmp.17 = lgetv %y;
+        %tmp.19 = lgetv %newMoon.1;
+        invoke %tmp.12 %tmp.13(%tmp.15, %tmp.17, %tmp.19);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_281_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 286 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_8_if_stmt:
+        %tmp.21 = lgetv %moonNumber;
+        %tmp.22 = 1;
+        %tmp.23 = eq %tmp.21 %tmp.22;
+        bf %tmp.23 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 287 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_29_stop" ]
+        %waxingCrescent.2 = local;
+        %tmp.24 = getm $.Toybox.WatchUi;
+        %tmp.25 = getv function %tmp.24 :loadResource;
+        %tmp.27 = getv ? :Rez;
+        %tmp.28 = getv %tmp.27 :Drawables;
+        %tmp.29 = getv %tmp.28 :waxingCrescent;
+        %tmp.30 = invoke %tmp.24 %tmp.25(%tmp.29);
+        lputv %waxingCrescent.2 %tmp.30;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 288 12 ]
+        %tmp.31 = lgetv %dc;
+        %tmp.32 = getv function %tmp.31 :drawBitmap;
+        %tmp.34 = lgetv %x;
+        %tmp.36 = lgetv %y;
+        %tmp.38 = lgetv %waxingCrescent.2;
+        invoke %tmp.31 %tmp.32(%tmp.34, %tmp.36, %tmp.38);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_286_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 291 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_8_if_stmt:
+        %tmp.40 = lgetv %moonNumber;
+        %tmp.41 = 2;
+        %tmp.42 = eq %tmp.40 %tmp.41;
+        bf %tmp.42 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 292 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_29_stop" ]
+        %firstQuarter.3 = local;
+        %tmp.43 = getm $.Toybox.WatchUi;
+        %tmp.44 = getv function %tmp.43 :loadResource;
+        %tmp.46 = getv ? :Rez;
+        %tmp.47 = getv %tmp.46 :Drawables;
+        %tmp.48 = getv %tmp.47 :firstQuarter;
+        %tmp.49 = invoke %tmp.43 %tmp.44(%tmp.48);
+        lputv %firstQuarter.3 %tmp.49;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 293 12 ]
+        %tmp.50 = lgetv %dc;
+        %tmp.51 = getv function %tmp.50 :drawBitmap;
+        %tmp.53 = lgetv %x;
+        %tmp.55 = lgetv %y;
+        %tmp.57 = lgetv %firstQuarter.3;
+        invoke %tmp.50 %tmp.51(%tmp.53, %tmp.55, %tmp.57);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_291_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 296 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_8_if_stmt:
+        %tmp.59 = lgetv %moonNumber;
+        %tmp.60 = 3;
+        %tmp.61 = eq %tmp.59 %tmp.60;
+        bf %tmp.61 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 297 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_29_stop" ]
+        %waxingGibbous.4 = local;
+        %tmp.62 = getm $.Toybox.WatchUi;
+        %tmp.63 = getv function %tmp.62 :loadResource;
+        %tmp.65 = getv ? :Rez;
+        %tmp.66 = getv %tmp.65 :Drawables;
+        %tmp.67 = getv %tmp.66 :waxingGibbous;
+        %tmp.68 = invoke %tmp.62 %tmp.63(%tmp.67);
+        lputv %waxingGibbous.4 %tmp.68;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 298 12 ]
+        %tmp.69 = lgetv %dc;
+        %tmp.70 = getv function %tmp.69 :drawBitmap;
+        %tmp.72 = lgetv %x;
+        %tmp.74 = lgetv %y;
+        %tmp.76 = lgetv %waxingGibbous.4;
+        invoke %tmp.69 %tmp.70(%tmp.72, %tmp.74, %tmp.76);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_296_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 301 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_8_if_stmt:
+        %tmp.78 = lgetv %moonNumber;
+        %tmp.79 = 4;
+        %tmp.80 = eq %tmp.78 %tmp.79;
+        bf %tmp.80 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 302 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_29_stop" ]
+        %fullMoon.5 = local;
+        %tmp.81 = getm $.Toybox.WatchUi;
+        %tmp.82 = getv function %tmp.81 :loadResource;
+        %tmp.84 = getv ? :Rez;
+        %tmp.85 = getv %tmp.84 :Drawables;
+        %tmp.86 = getv %tmp.85 :fullMoon;
+        %tmp.87 = invoke %tmp.81 %tmp.82(%tmp.86);
+        lputv %fullMoon.5 %tmp.87;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 303 12 ]
+        %tmp.88 = lgetv %dc;
+        %tmp.89 = getv function %tmp.88 :drawBitmap;
+        %tmp.91 = lgetv %x;
+        %tmp.93 = lgetv %y;
+        %tmp.95 = lgetv %fullMoon.5;
+        invoke %tmp.88 %tmp.89(%tmp.91, %tmp.93, %tmp.95);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_301_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 306 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_8_if_stmt:
+        %tmp.97 = lgetv %moonNumber;
+        %tmp.98 = 5;
+        %tmp.99 = eq %tmp.97 %tmp.98;
+        bf %tmp.99 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 307 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_29_stop" ]
+        %waningGibbous.6 = local;
+        %tmp.100 = getm $.Toybox.WatchUi;
+        %tmp.101 = getv function %tmp.100 :loadResource;
+        %tmp.103 = getv ? :Rez;
+        %tmp.104 = getv %tmp.103 :Drawables;
+        %tmp.105 = getv %tmp.104 :waningGibbous;
+        %tmp.106 = invoke %tmp.100 %tmp.101(%tmp.105);
+        lputv %waningGibbous.6 %tmp.106;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 308 12 ]
+        %tmp.107 = lgetv %dc;
+        %tmp.108 = getv function %tmp.107 :drawBitmap;
+        %tmp.110 = lgetv %x;
+        %tmp.112 = lgetv %y;
+        %tmp.114 = lgetv %waningGibbous.6;
+        invoke %tmp.107 %tmp.108(%tmp.110, %tmp.112, %tmp.114);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_306_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 311 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_8_if_stmt:
+        %tmp.116 = lgetv %moonNumber;
+        %tmp.117 = 6;
+        %tmp.118 = eq %tmp.116 %tmp.117;
+        bf %tmp.118 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 312 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_29_stop" ]
+        %thirdQuarter.7 = local;
+        %tmp.119 = getm $.Toybox.WatchUi;
+        %tmp.120 = getv function %tmp.119 :loadResource;
+        %tmp.122 = getv ? :Rez;
+        %tmp.123 = getv %tmp.122 :Drawables;
+        %tmp.124 = getv %tmp.123 :thirdQuarter;
+        %tmp.125 = invoke %tmp.119 %tmp.120(%tmp.124);
+        lputv %thirdQuarter.7 %tmp.125;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 313 12 ]
+        %tmp.126 = lgetv %dc;
+        %tmp.127 = getv function %tmp.126 :drawBitmap;
+        %tmp.129 = lgetv %x;
+        %tmp.131 = lgetv %y;
+        %tmp.133 = lgetv %thirdQuarter.7;
+        invoke %tmp.126 %tmp.127(%tmp.129, %tmp.131, %tmp.133);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_311_8_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 316 8 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_8_if_stmt:
+        %tmp.135 = lgetv %moonNumber;
+        %tmp.136 = 7;
+        %tmp.137 = eq %tmp.135 %tmp.136;
+        bf %tmp.137 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_8_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_29_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 317 12 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_29_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_29_stop" ]
+        %waningCrescent.8 = local;
+        %tmp.138 = getm $.Toybox.WatchUi;
+        %tmp.139 = getv function %tmp.138 :loadResource;
+        %tmp.141 = getv ? :Rez;
+        %tmp.142 = getv %tmp.141 :Drawables;
+        %tmp.143 = getv %tmp.142 :waningCrescent;
+        %tmp.144 = invoke %tmp.138 %tmp.139(%tmp.143);
+        lputv %waningCrescent.8 %tmp.144;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 318 12 ]
+        %tmp.145 = lgetv %dc;
+        %tmp.146 = getv function %tmp.145 :drawBitmap;
+        %tmp.148 = lgetv %x;
+        %tmp.150 = lgetv %y;
+        %tmp.152 = lgetv %waningCrescent.8;
+        invoke %tmp.145 %tmp.146(%tmp.148, %tmp.150, %tmp.152);
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_29_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_8_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_316_8_if_end:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_280_46_stop:
+    }
+    [ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 324; ]
+    function getMoonPhase(year, month, day) {
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 326 6 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_stop" ]
+        %c.1 = local;
+        %tmp.1 = 0;
+        lputv %c.1 %tmp.1;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 327 6 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_stop" ]
+        %e.2 = local;
+        %tmp.2 = 0;
+        lputv %e.2 %tmp.2;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 328 6 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_stop" ]
+        %jd.3 = local;
+        %tmp.3 = 0;
+        lputv %jd.3 %tmp.3;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 329 6 ]
+        [ "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_start" "_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_stop" ]
+        %b.4 = local;
+        %tmp.4 = 0;
+        lputv %b.4 %tmp.4;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 331 6 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_6_if_stmt:
+        %tmp.6 = lgetv %month;
+        %tmp.7 = 3;
+        %tmp.8 = lt %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_6_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_6_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_21_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 332 8 ]
+        %tmp.11 = lgetv %year;
+        %tmp.12 = sub %tmp.11 1;
+        lputv %year %tmp.12;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 333 8 ]
+        %tmp.13 = lgetv %month;
+        %tmp.14 = 12;
+        %tmp.15 = add %tmp.13 %tmp.14;
+        lputv %month %tmp.15;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_21_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_6_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_331_6_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 336 6 ]
+        %tmp.18 = lgetv %month;
+        %tmp.19 = add %tmp.18 1;
+        lputv %month %tmp.19;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 338 6 ]
+        %tmp.20 = 365.25;
+        %tmp.22 = lgetv %year;
+        %tmp.23 = mul %tmp.20 %tmp.22;
+        lputv %c.1 %tmp.23;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 340 6 ]
+        %tmp.24 = 30.6;
+        %tmp.26 = lgetv %month;
+        %tmp.27 = mul %tmp.24 %tmp.26;
+        lputv %e.2 %tmp.27;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 342 6 ]
+        %tmp.29 = lgetv %c.1;
+        %tmp.31 = lgetv %e.2;
+        %tmp.32 = add %tmp.29 %tmp.31;
+        %tmp.34 = lgetv %day;
+        %tmp.35 = add %tmp.32 %tmp.34;
+        %tmp.36 = 694039.09;
+        %tmp.37 = sub %tmp.35 %tmp.36;
+        lputv %jd.3 %tmp.37;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 344 6 ]
+        %tmp.38 = lgetv %jd.3;
+        %tmp.39 = 29.5305882;
+        %tmp.40 = div %tmp.38 %tmp.39;
+        lputv %jd.3 %tmp.40;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 346 6 ]
+        %tmp.42 = lgetv %jd.3;
+        %tmp.43 = getv function %tmp.42 :toNumber;
+        %tmp.44 = invoke %tmp.42 %tmp.43();
+        lputv %b.4 %tmp.44;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 348 6 ]
+        %tmp.45 = lgetv %jd.3;
+        %tmp.47 = lgetv %b.4;
+        %tmp.48 = sub %tmp.45 %tmp.47;
+        lputv %jd.3 %tmp.48;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 350 6 ]
+        %tmp.50 = getv ? :Math;
+        %tmp.51 = getv function %tmp.50 :round;
+        %tmp.53 = lgetv %jd.3;
+        %tmp.54 = 8;
+        %tmp.55 = mul %tmp.53 %tmp.54;
+        %tmp.56 = invoke %tmp.50 %tmp.51(%tmp.55);
+        lputv %b.4 %tmp.56;
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 352 6 ]
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_6_if_stmt:
+        %tmp.58 = lgetv %b.4;
+        %tmp.59 = 8;
+        %tmp.60 = gte %tmp.58 %tmp.59;
+        bf %tmp.60 @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_6_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_6_if_true:
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_18_start:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 353 8 ]
+        %tmp.61 = 0;
+        lputv %b.4 %tmp.61;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_18_stop:
+        goto @_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_6_if_end;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_352_6_if_end:
+[ "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" 356 6 ]
+        %tmp.63 = lgetv %b.4;
+        %tmp.64 = getv function %tmp.63 :toNumber;
+        %tmp.65 = invoke %tmp.63 %tmp.64();
+        ret %tmp.65;
+_Users_christophehumbert_Code_sdkgraminTwo_DarkSideMoonWatch_source_DarkSideMoonWatchView_mc_324_44_stop:
+    }
+}
+[ @file = "/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc"; @line = 1; ]
+<init> {
+}

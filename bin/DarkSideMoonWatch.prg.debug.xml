@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+    <manifest filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/manifest.xml"/>
+    <pcToLineNum>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="1" lineNum="5" parent="globals/DarkSideMoonWatchApp" pc="268435460" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="2" lineNum="12" parent="globals/DarkSideMoonWatchApp" pc="268435479" symbol="onStart"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="3" lineNum="25" parent="globals/DarkSideMoonWatchApp" pc="268435482" symbol="onSettingsChanged"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="3" lineNum="26" parent="globals/DarkSideMoonWatchApp" pc="268435484" symbol="onSettingsChanged"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="4" lineNum="20" parent="globals/DarkSideMoonWatchApp" pc="268435501" symbol="getInitialView"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="4" lineNum="21" parent="globals/DarkSideMoonWatchApp" pc="268435503" symbol="getInitialView"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="5" lineNum="7" parent="globals/DarkSideMoonWatchApp" pc="268435544" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="5" lineNum="8" parent="globals/DarkSideMoonWatchApp" pc="268435546" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="6" lineNum="16" parent="globals/DarkSideMoonWatchApp" pc="268435565" symbol="onStop"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="7" lineNum="31" parent="globals" pc="268435568" symbol="getApp"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchApp.mc" id="7" lineNum="32" parent="globals" pc="268435578" symbol="getApp"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="8" lineNum="6" parent="globals/Background" pc="268435594" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="9" lineNum="8" parent="globals/Background" pc="268435613" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="9" lineNum="9" parent="globals/Background" pc="268435617" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="9" lineNum="13" parent="globals/Background" pc="268435638" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="10" lineNum="16" parent="globals/Background" pc="268435659" symbol="draw"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="10" lineNum="18" parent="globals/Background" pc="268435661" symbol="draw"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchBackground.mc" id="10" lineNum="19" parent="globals/Background" pc="268435703" symbol="draw"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/bin/gen/006-B3943-00/source/Rez.mcgen" id="11" lineNum="7" parent="globals/Rez" pc="268435716" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="12" lineNum="9" parent="globals/DarkSideMoonWatchView" pc="268435740" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="324" parent="globals/DarkSideMoonWatchView" pc="268435759" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="326" parent="globals/DarkSideMoonWatchView" pc="268435763" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="327" parent="globals/DarkSideMoonWatchView" pc="268435770" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="328" parent="globals/DarkSideMoonWatchView" pc="268435777" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="329" parent="globals/DarkSideMoonWatchView" pc="268435784" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="331" parent="globals/DarkSideMoonWatchView" pc="268435791" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="332" parent="globals/DarkSideMoonWatchView" pc="268435802" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="333" parent="globals/DarkSideMoonWatchView" pc="268435812" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="336" parent="globals/DarkSideMoonWatchView" pc="268435825" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="338" parent="globals/DarkSideMoonWatchView" pc="268435835" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="340" parent="globals/DarkSideMoonWatchView" pc="268435845" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="342" parent="globals/DarkSideMoonWatchView" pc="268435855" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="344" parent="globals/DarkSideMoonWatchView" pc="268435871" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="346" parent="globals/DarkSideMoonWatchView" pc="268435881" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="348" parent="globals/DarkSideMoonWatchView" pc="268435894" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="350" parent="globals/DarkSideMoonWatchView" pc="268435901" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="352" parent="globals/DarkSideMoonWatchView" pc="268435928" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="353" parent="globals/DarkSideMoonWatchView" pc="268435939" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="13" lineNum="356" parent="globals/DarkSideMoonWatchView" pc="268435949" symbol="getMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="280" parent="globals/DarkSideMoonWatchView" pc="268435961" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="281" parent="globals/DarkSideMoonWatchView" pc="268435965" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="282" parent="globals/DarkSideMoonWatchView" pc="268435976" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="283" parent="globals/DarkSideMoonWatchView" pc="268436017" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="286" parent="globals/DarkSideMoonWatchView" pc="268436038" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="287" parent="globals/DarkSideMoonWatchView" pc="268436049" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="288" parent="globals/DarkSideMoonWatchView" pc="268436090" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="291" parent="globals/DarkSideMoonWatchView" pc="268436111" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="292" parent="globals/DarkSideMoonWatchView" pc="268436122" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="293" parent="globals/DarkSideMoonWatchView" pc="268436163" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="296" parent="globals/DarkSideMoonWatchView" pc="268436184" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="297" parent="globals/DarkSideMoonWatchView" pc="268436195" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="298" parent="globals/DarkSideMoonWatchView" pc="268436236" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="301" parent="globals/DarkSideMoonWatchView" pc="268436257" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="302" parent="globals/DarkSideMoonWatchView" pc="268436268" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="303" parent="globals/DarkSideMoonWatchView" pc="268436309" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="306" parent="globals/DarkSideMoonWatchView" pc="268436330" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="307" parent="globals/DarkSideMoonWatchView" pc="268436341" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="308" parent="globals/DarkSideMoonWatchView" pc="268436382" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="311" parent="globals/DarkSideMoonWatchView" pc="268436403" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="312" parent="globals/DarkSideMoonWatchView" pc="268436414" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="313" parent="globals/DarkSideMoonWatchView" pc="268436455" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="316" parent="globals/DarkSideMoonWatchView" pc="268436476" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="317" parent="globals/DarkSideMoonWatchView" pc="268436487" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="15" lineNum="318" parent="globals/DarkSideMoonWatchView" pc="268436528" symbol="showMoonPhase"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="17" lineNum="20" parent="globals/DarkSideMoonWatchView" pc="268436550" symbol="onLayout"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="17" lineNum="21" parent="globals/DarkSideMoonWatchView" pc="268436552" symbol="onLayout"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="19" lineNum="15" parent="globals/DarkSideMoonWatchView" pc="268436594" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="19" lineNum="16" parent="globals/DarkSideMoonWatchView" pc="268436596" symbol="initialize"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="31" parent="globals/DarkSideMoonWatchView" pc="268436615" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="39" parent="globals/DarkSideMoonWatchView" pc="268436619" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="40" parent="globals/DarkSideMoonWatchView" pc="268436636" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="41" parent="globals/DarkSideMoonWatchView" pc="268436646" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="42" parent="globals/DarkSideMoonWatchView" pc="268436656" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="45" parent="globals/DarkSideMoonWatchView" pc="268436666" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="46" parent="globals/DarkSideMoonWatchView" pc="268436676" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="47" parent="globals/DarkSideMoonWatchView" pc="268436689" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="48" parent="globals/DarkSideMoonWatchView" pc="268436717" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="51" parent="globals/DarkSideMoonWatchView" pc="268436736" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="52" parent="globals/DarkSideMoonWatchView" pc="268436749" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="53" parent="globals/DarkSideMoonWatchView" pc="268436762" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="56" parent="globals/DarkSideMoonWatchView" pc="268436775" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="57" parent="globals/DarkSideMoonWatchView" pc="268436794" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="58" parent="globals/DarkSideMoonWatchView" pc="268436813" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="59" parent="globals/DarkSideMoonWatchView" pc="268436826" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="63" parent="globals/DarkSideMoonWatchView" pc="268436836" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="67" parent="globals/DarkSideMoonWatchView" pc="268436873" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="71" parent="globals/DarkSideMoonWatchView" pc="268436910" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="95" parent="globals/DarkSideMoonWatchView" pc="268436934" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="98" parent="globals/DarkSideMoonWatchView" pc="268436964" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="99" parent="globals/DarkSideMoonWatchView" pc="268437005" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="102" parent="globals/DarkSideMoonWatchView" pc="268437023" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="174" parent="globals/DarkSideMoonWatchView" pc="268437061" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="175" parent="globals/DarkSideMoonWatchView" pc="268437078" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="176" parent="globals/DarkSideMoonWatchView" pc="268437100" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="177" parent="globals/DarkSideMoonWatchView" pc="268437139" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="178" parent="globals/DarkSideMoonWatchView" pc="268437161" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="181" parent="globals/DarkSideMoonWatchView" pc="268437200" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="182" parent="globals/DarkSideMoonWatchView" pc="268437217" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="183" parent="globals/DarkSideMoonWatchView" pc="268437239" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="186" parent="globals/DarkSideMoonWatchView" pc="268437278" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="187" parent="globals/DarkSideMoonWatchView" pc="268437295" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="188" parent="globals/DarkSideMoonWatchView" pc="268437317" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="192" parent="globals/DarkSideMoonWatchView" pc="268437356" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="193" parent="globals/DarkSideMoonWatchView" pc="268437373" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="194" parent="globals/DarkSideMoonWatchView" pc="268437395" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="195" parent="globals/DarkSideMoonWatchView" pc="268437434" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="196" parent="globals/DarkSideMoonWatchView" pc="268437456" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="199" parent="globals/DarkSideMoonWatchView" pc="268437495" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="200" parent="globals/DarkSideMoonWatchView" pc="268437517" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="201" parent="globals/DarkSideMoonWatchView" pc="268437551" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="202" parent="globals/DarkSideMoonWatchView" pc="268437591" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="203" parent="globals/DarkSideMoonWatchView" pc="268437640" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="207" parent="globals/DarkSideMoonWatchView" pc="268437689" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="208" parent="globals/DarkSideMoonWatchView" pc="268437705" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="209" parent="globals/DarkSideMoonWatchView" pc="268437715" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="210" parent="globals/DarkSideMoonWatchView" pc="268437732" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="211" parent="globals/DarkSideMoonWatchView" pc="268437754" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="213" parent="globals/DarkSideMoonWatchView" pc="268437790" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="214" parent="globals/DarkSideMoonWatchView" pc="268437812" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="218" parent="globals/DarkSideMoonWatchView" pc="268437855" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="219" parent="globals/DarkSideMoonWatchView" pc="268437890" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="220" parent="globals/DarkSideMoonWatchView" pc="268437900" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="221" parent="globals/DarkSideMoonWatchView" pc="268437917" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="222" parent="globals/DarkSideMoonWatchView" pc="268437939" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="224" parent="globals/DarkSideMoonWatchView" pc="268437975" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="225" parent="globals/DarkSideMoonWatchView" pc="268437997" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="228" parent="globals/DarkSideMoonWatchView" pc="268438068" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="229" parent="globals/DarkSideMoonWatchView" pc="268438090" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="230" parent="globals/DarkSideMoonWatchView" pc="268438107" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="238" parent="globals/DarkSideMoonWatchView" pc="268438243" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="239" parent="globals/DarkSideMoonWatchView" pc="268438265" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="240" parent="globals/DarkSideMoonWatchView" pc="268438282" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="248" parent="globals/DarkSideMoonWatchView" pc="268438421" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="249" parent="globals/DarkSideMoonWatchView" pc="268438484" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="250" parent="globals/DarkSideMoonWatchView" pc="268438525" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="252" parent="globals/DarkSideMoonWatchView" pc="268438549" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="253" parent="globals/DarkSideMoonWatchView" pc="268438571" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="256" parent="globals/DarkSideMoonWatchView" pc="268438639" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="257" parent="globals/DarkSideMoonWatchView" pc="268438669" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="258" parent="globals/DarkSideMoonWatchView" pc="268438710" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="260" parent="globals/DarkSideMoonWatchView" pc="268438734" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/source/DarkSideMoonWatchView.mc" id="21" lineNum="261" parent="globals/DarkSideMoonWatchView" pc="268438756" symbol="onUpdate"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/bin/gen/006-B3943-00/source/Rez.mcgen" id="22" lineNum="32" parent="globals/Rez/Layouts" pc="268438825" symbol="WatchFace"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/bin/gen/006-B3943-00/source/Rez.mcgen" id="22" lineNum="33" parent="globals/Rez/Layouts" pc="268438837" symbol="WatchFace"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/bin/gen/006-B3943-00/source/Rez.mcgen" id="22" lineNum="35" parent="globals/Rez/Layouts" pc="268438865" symbol="WatchFace"/>
+        <entry filename="/Users/christophehumbert/Code/sdkgraminTwo/DarkSideMoonWatch/bin/gen/006-B3943-00/source/Rez.mcgen" id="22" lineNum="37" parent="globals/Rez/Layouts" pc="268439000" symbol="WatchFace"/>
+    </pcToLineNum>
+    <symbolTable>
+        <entry id="8388639" module="true" symbol="Graphics"/>
+        <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+        <entry id="7" module="true" symbol="globals/Rez/Menus"/>
+        <entry field="true" id="20" symbol="darkvador"/>
+        <entry id="9" object="true" symbol="DarkSideMoonWatchApp"/>
+        <entry id="8389683" method="true" symbol="onSettingsChanged"/>
+        <entry field="true" id="37" symbol="ColorRed"/>
+        <entry field="true" id="25" symbol="redmoon"/>
+        <entry field="true" id="40" symbol="MilitaryFormatTitle"/>
+        <entry id="8388924" module="true" symbol="Gregorian"/>
+        <entry field="true" id="8388611" module="true" symbol="Toybox"/>
+        <entry field="true" id="34" symbol="ColorBlue"/>
+        <entry field="true" id="19" symbol="creature"/>
+        <entry field="true" id="31" symbol="AppName"/>
+        <entry field="true" id="30" symbol="waxingGibbous"/>
+        <entry id="8" module="true" symbol="globals/Rez/Strings"/>
+        <entry id="8388772" module="true" object="true" symbol="Fonts"/>
+        <entry field="true" id="26" symbol="thirdQuarter"/>
+        <entry id="8388648" module="true" symbol="WatchUi"/>
+        <entry field="true" id="23" symbol="fullMoon"/>
+        <entry id="2" module="true" symbol="globals/Rez"/>
+        <entry id="8389124" method="true" symbol="onUpdate"/>
+        <entry id="8389375" method="true" object="true" symbol="WatchFace"/>
+        <entry field="true" id="8389065" symbol="locY"/>
+        <entry field="true" id="8389064" symbol="locX"/>
+        <entry id="15" method="true" symbol="getMoonPhase"/>
+        <entry id="8388771" module="true" object="true" symbol="Drawables"/>
+        <entry id="8389348" symbol="font"/>
+        <entry id="12" module="true" symbol="Menus"/>
+        <entry id="8389275" method="true" symbol="getApp"/>
+        <entry field="true" id="24" symbol="newMoon"/>
+        <entry field="true" id="35" symbol="ColorDarkGray"/>
+        <entry id="6" module="true" symbol="globals/Rez/Layouts"/>
+        <entry field="true" id="22" symbol="firstQuarter"/>
+        <entry id="8389122" method="true" symbol="onLayout"/>
+        <entry field="true" id="29" symbol="waxingCrescent"/>
+        <entry id="8389376" method="true" symbol="onEnterSleep"/>
+        <entry id="16" method="true" symbol="showMoonPhase"/>
+        <entry field="true" id="8389063" symbol="identifier"/>
+        <entry id="8389349" symbol="justification"/>
+        <entry field="true" id="18" symbol="blackhole"/>
+        <entry field="true" id="21" symbol="emperor"/>
+        <entry field="true" id="28" symbol="waningGibbous"/>
+        <entry field="true" id="38" symbol="ColorWhite"/>
+        <entry id="5" module="true" symbol="globals/Rez/JsonData"/>
+        <entry field="true" id="33" symbol="ColorBlack"/>
+        <entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+        <entry id="10" object="true" symbol="DarkSideMoonWatchView"/>
+        <entry field="true" id="14" symbol="TWO_PI"/>
+        <entry id="8389377" method="true" symbol="onExitSleep"/>
+        <entry id="8388644" module="true" symbol="System"/>
+        <entry id="8388645" module="true" symbol="Time"/>
+        <entry id="8388769" module="true" object="true" symbol="Rez"/>
+        <entry id="8388640" module="true" symbol="Lang"/>
+        <entry id="8390088" module="true" object="true" symbol="JsonData"/>
+        <entry id="8389068" method="true" symbol="draw"/>
+        <entry field="true" id="17" symbol="LauncherIcon"/>
+        <entry id="8388610" symbol="statics"/>
+        <entry id="8389123" method="true" symbol="onShow"/>
+        <entry id="8389350" module="true" symbol="globals"/>
+        <entry field="true" id="32" symbol="BackgroundColorTitle"/>
+        <entry id="8388770" module="true" object="true" symbol="Strings"/>
+        <entry id="8390146" module="true" object="true" symbol="Background"/>
+        <entry id="8388702" method="true" symbol="initialize"/>
+        <entry id="8389279" method="true" symbol="onStart"/>
+        <entry field="true" id="13" symbol="ANGLE_ADJUST"/>
+        <entry field="true" id="36" symbol="ColorLightGray"/>
+        <entry id="8389280" method="true" symbol="getInitialView"/>
+        <entry id="8389281" method="true" symbol="onStop"/>
+        <entry id="8389347" symbol="color"/>
+        <entry field="true" id="39" symbol="ForegroundColorTitle"/>
+        <entry id="11" module="true" symbol="Layouts"/>
+        <entry id="4" module="true" symbol="globals/Rez/Fonts"/>
+        <entry id="8389125" method="true" symbol="onHide"/>
+        <entry id="8388635" module="true" symbol="Application"/>
+        <entry field="true" id="27" symbol="waningCrescent"/>
+    </symbolTable>
+    <localVars>
+        <entry endPc="268435657" name="dictionary" stackId="1" startPc="268435617"/>
+        <entry arg="true" endPc="268435715" name="dc" stackId="1" startPc="268435659"/>
+        <entry arg="true" endPc="268435960" name="year" stackId="1" startPc="268435759"/>
+        <entry arg="true" endPc="268435960" name="month" stackId="2" startPc="268435759"/>
+        <entry arg="true" endPc="268435960" name="day" stackId="3" startPc="268435759"/>
+        <entry endPc="268435960" name="c" stackId="4" startPc="268435763"/>
+        <entry endPc="268435960" name="e" stackId="5" startPc="268435763"/>
+        <entry endPc="268435960" name="jd" stackId="6" startPc="268435763"/>
+        <entry endPc="268435960" name="b" stackId="7" startPc="268435763"/>
+        <entry arg="true" endPc="268436549" name="moonNumber" stackId="1" startPc="268435961"/>
+        <entry arg="true" endPc="268436549" name="dc" stackId="2" startPc="268435961"/>
+        <entry arg="true" endPc="268436549" name="x" stackId="3" startPc="268435961"/>
+        <entry arg="true" endPc="268436549" name="y" stackId="4" startPc="268435961"/>
+        <entry endPc="268436034" name="newMoon" stackId="5" startPc="268435976"/>
+        <entry endPc="268436107" name="waxingCrescent" stackId="6" startPc="268436049"/>
+        <entry endPc="268436180" name="firstQuarter" stackId="7" startPc="268436122"/>
+        <entry endPc="268436253" name="waxingGibbous" stackId="8" startPc="268436195"/>
+        <entry endPc="268436326" name="fullMoon" stackId="9" startPc="268436268"/>
+        <entry endPc="268436399" name="waningGibbous" stackId="10" startPc="268436341"/>
+        <entry endPc="268436472" name="thirdQuarter" stackId="11" startPc="268436414"/>
+        <entry endPc="268436545" name="waningCrescent" stackId="12" startPc="268436487"/>
+        <entry arg="true" endPc="268436593" name="dc" stackId="1" startPc="268436550"/>
+        <entry arg="true" endPc="268438824" name="dc" stackId="1" startPc="268436615"/>
+        <entry endPc="268438823" name="now" stackId="2" startPc="268436619"/>
+        <entry endPc="268438823" name="hour" stackId="3" startPc="268436619"/>
+        <entry endPc="268438823" name="min" stackId="4" startPc="268436619"/>
+        <entry endPc="268438823" name="sec" stackId="5" startPc="268436619"/>
+        <entry endPc="268438823" name="hour_fraction" stackId="6" startPc="268436619"/>
+        <entry endPc="268438823" name="minute_angle" stackId="7" startPc="268436619"/>
+        <entry endPc="268438823" name="hour_angle" stackId="8" startPc="268436619"/>
+        <entry endPc="268438823" name="seconde_angle" stackId="9" startPc="268436619"/>
+        <entry endPc="268438823" name="center_x" stackId="10" startPc="268436619"/>
+        <entry endPc="268438823" name="center_y" stackId="11" startPc="268436619"/>
+        <entry endPc="268438823" name="diameter" stackId="12" startPc="268436619"/>
+        <entry endPc="268438823" name="radius" stackId="13" startPc="268436619"/>
+        <entry endPc="268438823" name="today" stackId="14" startPc="268436619"/>
+        <entry endPc="268438823" name="moonNumber" stackId="15" startPc="268436619"/>
+        <entry endPc="268438417" name="RedMoon" stackId="16" startPc="268436964"/>
+        <entry endPc="268438417" name="secArc" stackId="17" startPc="268436964"/>
+        <entry endPc="268438417" name="drawSecArc" stackId="18" startPc="268436964"/>
+        <entry endPc="268438417" name="battery" stackId="19" startPc="268436964"/>
+        <entry endPc="268438417" name="drawBattery" stackId="20" startPc="268436964"/>
+        <entry endPc="268438635" name="blackhole" stackId="21" startPc="268438484"/>
+        <entry endPc="268438820" name="creature" stackId="22" startPc="268438669"/>
+        <entry arg="true" endPc="268439026" name="dc" stackId="1" startPc="268438825"/>
+        <entry endPc="268439026" name="rez_cmp_local_custom_drawable_13433066331936467655" stackId="2" startPc="268438837"/>
+        <entry endPc="268439026" name="rez_cmp_local_text_TimeLabel" stackId="3" startPc="268438837"/>
+    </localVars>
+    <annotations>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="MilitaryFormatTitle"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="waxingCrescent"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="firstQuarter"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="thirdQuarter"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="waxingGibbous"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorWhite"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ForegroundColorTitle"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="blackhole"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="fullMoon"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorLightGray"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorBlue"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="newMoon"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="BackgroundColorTitle"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorRed"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="waningGibbous"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="creature"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorDarkGray"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="waningCrescent"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorBlack"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="darkvador"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="redmoon"/>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="emperor"/>
+    </annotations>
+    <dataEntryOffsetMappings>
+        <dataEntry label="globals" offset="87" parentId="" symbolId="globals" type="module"/>
+        <dataEntry label="globals/DarkSideMoonWatchApp" offset="166" parentId="globals" symbolId="DarkSideMoonWatchApp" type="class"/>
+        <dataEntry label="globals/Background" offset="245" parentId="globals" symbolId="Background" type="class"/>
+        <dataEntry label="globals/Rez" offset="300" parentId="globals" symbolId="Rez" type="module"/>
+        <dataEntry label="globals/DarkSideMoonWatchView" offset="379" parentId="globals" symbolId="DarkSideMoonWatchView" type="class"/>
+        <dataEntry label="globals/Rez/Drawables" offset="506" parentId="Rez" symbolId="Drawables" type="module"/>
+        <dataEntry label="globals/Rez/Layouts" offset="649" parentId="Rez" symbolId="Layouts" type="module"/>
+        <dataEntry label="globals/Rez/Menus" offset="688" parentId="Rez" symbolId="Menus" type="module"/>
+        <dataEntry label="globals/Rez/Fonts" offset="719" parentId="Rez" symbolId="Fonts" type="module"/>
+        <dataEntry label="globals/Rez/Strings" offset="750" parentId="Rez" symbolId="Strings" type="module"/>
+        <dataEntry label="globals/Rez/JsonData" offset="861" parentId="Rez" symbolId="JsonData" type="module"/>
+    </dataEntryOffsetMappings>
+    <functions>
+        <functionEntry accessMode="public" endPc="268435478" name="&lt;init&gt;" parent="DarkSideMoonWatchApp" startPc="268435460">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435481" name="onStart" parent="DarkSideMoonWatchApp" startPc="268435479">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435500" name="onSettingsChanged" parent="DarkSideMoonWatchApp" startPc="268435482">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435543" name="getInitialView" parent="DarkSideMoonWatchApp" startPc="268435501">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435564" name="initialize" parent="DarkSideMoonWatchApp" startPc="268435544">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435567" name="onStop" parent="DarkSideMoonWatchApp" startPc="268435565">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435593" name="getApp" startPc="268435568">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435612" name="&lt;init&gt;" parent="Background" startPc="268435594">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435658" name="initialize" parent="Background" startPc="268435613">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435715" name="draw" parent="Background" startPc="268435659">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435739" name="&lt;init&gt;" parent="Rez" startPc="268435716">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435758" name="&lt;init&gt;" parent="DarkSideMoonWatchView" startPc="268435740">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435960" name="getMoonPhase" parent="DarkSideMoonWatchView" startPc="268435759">
+            <param id="year"/>
+            <param id="month"/>
+            <param id="day"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onExitSleep" parent="DarkSideMoonWatchView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436549" name="showMoonPhase" parent="DarkSideMoonWatchView" startPc="268435961">
+            <param id="moonNumber"/>
+            <param id="dc"/>
+            <param id="x"/>
+            <param id="y"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onShow" parent="DarkSideMoonWatchView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436593" name="onLayout" parent="DarkSideMoonWatchView" startPc="268436550">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onEnterSleep" parent="DarkSideMoonWatchView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436614" name="initialize" parent="DarkSideMoonWatchView" startPc="268436594">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="onHide" parent="DarkSideMoonWatchView">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438824" name="onUpdate" parent="DarkSideMoonWatchView" startPc="268436615">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Layouts">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Menus">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Fonts">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" name="&lt;init&gt;" parent="JsonData">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268439026" name="WatchFace" parent="Layouts" startPc="268438825">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+    </functions>
+</debugInfo>

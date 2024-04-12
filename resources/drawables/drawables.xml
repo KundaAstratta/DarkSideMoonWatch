@@ -1,0 +1,16 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="darkvador" filename="DarkVador.jpeg" />
+    <bitmap id="emperor" filename="Emperor.jpeg" />
+    <bitmap id="creature" filename="creature.jpeg" />
+    <bitmap id="blackhole" filename="blackhole.jpeg" />
+    <bitmap id="redmoon" filename="RedMoon.png" />
+    <bitmap id="newMoon" filename="newMoon.png" />
+    <bitmap id="waningCrescent" filename="waningCrescent.png" />
+    <bitmap id="thirdQuarter" filename="thirdQuarter.png" />
+    <bitmap id="waningGibbous" filename="waningGibbous.png" />
+    <bitmap id="fullMoon" filename="fullMoon.png" />    
+    <bitmap id="waxingGibbous" filename="waxingGibbous.png" /> 
+    <bitmap id="firstQuarter" filename="firstQuarter.png" /> 
+    <bitmap id="waxingCrescent" filename="waxingCrescent.png" />      
+</drawables>
