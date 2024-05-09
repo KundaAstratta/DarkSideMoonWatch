@@ -29,12 +29,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        // Get the current time and format it correctly
-        //var timeFormat = "$1$:$2$";
-        //var clockTime = System.getClockTime();
-        //var hours = clockTime.hour;
-
-
         // Get the current time
         var now = System.getClockTime();
         var hour = now.hour;
@@ -61,11 +55,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         //today and moon phase
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        //System.println(today.year);
-        //System.println(today.month);
-        //System.println(today.day);
         var moonNumber = getMoonPhase(today.year, today.month, today.day); 
-        //System.println(moonNumber);
 
         var notificationCount = System.getDeviceSettings().notificationCount;
         var notificationExist = false;
@@ -80,28 +70,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-/*
-        if ((System.getSystemStats().battery) < 20 && (System.getSystemStats().battery > 10) ) {       
-            if (!System.getDeviceSettings().is24Hour) {
-                if (hours > 12) {
-                    hours = hours - 12;
-                }
-            } else {
-                //if (getApp().getProperty("UseMilitaryFormat")) {
-                    timeFormat = "$1$$2$";
-                    hours = hours.format("%02d");
-                //}
-            }
-            var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
-
-            // Update the view
-            var view = View.findDrawableById("TimeLabel") as Text;
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
-            dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, timeString, Graphics.TEXT_JUSTIFY_CENTER);
-
-            //view.setText(timeString);
-        }
-*/
         var battery = System.getSystemStats().battery;
 
         if (battery >=20 ) {  
@@ -114,76 +82,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
                 //Moon phase
                 showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
-                
-                /*
-                if (moonNumber == 0) {
-                    var newMoon = WatchUi.loadResource(Rez.Drawables.newMoon) ;
-                    dc.drawBitmap(center_x, center_y, newMoon) ;
-                }
-
-                if (moonNumber == 1) {
-                    var waxingCrescent = WatchUi.loadResource(Rez.Drawables.waxingCrescent) ;
-                    dc.drawBitmap(center_x, center_y, waxingCrescent) ;
-                }
-
-                if (moonNumber == 2) {
-                    var firstQuarter = WatchUi.loadResource(Rez.Drawables.firstQuarter) ;
-                    dc.drawBitmap(center_x, center_y, firstQuarter) ;
-                }
-
-                if (moonNumber == 3) {
-                    var waxingGibbous = WatchUi.loadResource(Rez.Drawables.waxingGibbous) ;
-                    dc.drawBitmap(center_x, center_y, waxingGibbous) ;
-                }
-
-                if (moonNumber == 4) {
-                    var fullMoon = WatchUi.loadResource(Rez.Drawables.fullMoon) ;
-                    dc.drawBitmap(center_x, center_y, fullMoon) ;
-                }
-
-
-                if (moonNumber == 5) {
-                    var waningGibbous = WatchUi.loadResource(Rez.Drawables.waningGibbous) ;
-                    dc.drawBitmap(center_x, center_y, waningGibbous) ;
-                }
-
-                if (moonNumber == 6) {
-                    var thirdQuarter = WatchUi.loadResource(Rez.Drawables.thirdQuarter) ;
-                    dc.drawBitmap(center_x, center_y, thirdQuarter) ;
-                }
-
-                if (moonNumber == 7) {
-                    var waningCrescent = WatchUi.loadResource(Rez.Drawables.waningCrescent) ;
-                    dc.drawBitmap(center_x, center_y, waningCrescent) ;
-                }
-                */
-
-                //Digits
-                /*
-                for (var i = 0; i < 24; i++) {
-                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-                    dc.setPenWidth(2);
-                    dc.drawLine(
-                        (center_x + radius * 0.9 * Math.cos(i * 15 * TWO_PI / 360)), 
-                        (center_y + radius * 0.9 * Math.sin(i * 15 * TWO_PI / 360)),
-                        (center_x + radius * Math.cos(i * 15 * TWO_PI / 360)),
-                        (center_y + radius * Math.sin(i * 15 * TWO_PI / 360))
-                    );
-                }
-
-                for (var i = 0; i < 24; i++) {
-                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-                    dc.setPenWidth(2);
-                    dc.drawLine(
-                        (center_x + radius * 0.8 * Math.cos((i * 15 + 15/2) * TWO_PI / 360)), 
-                        (center_y + radius * 0.8 * Math.sin((i * 15 + 15/2) * TWO_PI / 360)),
-                        (center_x + radius * Math.cos((i * 15 + 15/2) * TWO_PI / 360)),
-                        (center_y + radius * Math.sin((i * 15 + 15/2) * TWO_PI / 360))
-                    );
-                }
-                */
-
-
+     
                 //Top Arc
                 dc.setPenWidth(3);
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -193,7 +92,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                     
                 //Left Arc
                 dc.setPenWidth(3);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
                 dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150,210);
 
                 //Right Arc
@@ -249,7 +148,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 );
 
                 // draw the minute hand
-                dc.setColor((Graphics.COLOR_RED), Graphics.COLOR_TRANSPARENT);
+                dc.setColor((Graphics.COLOR_DK_GREEN ), Graphics.COLOR_TRANSPARENT);
                 dc.setPenWidth(4);
                 dc.drawLine(
                     center_x + radius * 0.20 * Math.cos(minute_angle), 
