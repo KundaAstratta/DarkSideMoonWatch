@@ -55,7 +55,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         //today and moon phase
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var moonNumber = getMoonPhase(today.year, today.month, today.day); 
+        var moonNumber = getMoonPhase(today.year, ((today.month)-1), today.day); 
 
         var notificationCount = System.getDeviceSettings().notificationCount;
         var notificationExist = false;
@@ -115,7 +115,16 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 dc.drawText(center_x - radius * 0.93, center_y - radius * 0.12, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
                 dc.drawText(center_x + radius * 0.93, center_y - radius * 0.12 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
 
-        
+                //Date
+                var isShowDate = Properties.getValue("ShowDate"); 
+                var DateColor = Properties.getValue("DateColor") ; 
+
+                if (isShowDate) {
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
+                    dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
+                    dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);   
+                }     
+
                 //Second Right Arc ; seconds
                 var secArc = sec / 60.0 * 60.0;
                 var drawSecArc = -30 + secArc; 
