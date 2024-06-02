@@ -11,6 +11,8 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     var TWO_PI = Math.PI * 2;
     //angle adjust for time hands
     var ANGLE_ADJUST = Math.PI / 2.0;
+    //is in sleep mode
+    var isInSleepMode = false;
 
     function initialize() {
         WatchFace.initialize();
@@ -25,6 +27,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
+        isInSleepMode = false;
     }
 
     // Update the view
@@ -72,134 +75,162 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         var battery = System.getSystemStats().battery;
 
-        if (battery >=20 ) {  
+        //TEST
+        //isInSleepMode =  true;
+        //TEST
 
-            if (!notificationExist && phoneConnected)  {    
+        if (isInSleepMode) {
+            //draw hour hand
+            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(4);
+            dc.drawLine(
+                center_x + radius * 0.20 * Math.cos(hour_angle), 
+                center_y + radius * 0.20 * Math.sin(hour_angle), 
+                center_x + radius * 0.72 * Math.cos(hour_angle),
+                center_y + radius * 0.72 * Math.sin(hour_angle)
+            );
 
-                //Red Moon
-                var RedMoon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
-                dc.drawBitmap(center_x, center_y, RedMoon) ;
+            // draw the minute hand
+            dc.setColor((Graphics.COLOR_DK_GREEN ), Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(4);
+            dc.drawLine(
+                center_x + radius * 0.20 * Math.cos(minute_angle), 
+                center_y + radius * 0.20 * Math.sin(minute_angle),
+                center_x + radius * 0.90 * Math.cos(minute_angle),
+                center_y + radius * 0.90 * Math.sin(minute_angle)
+            );        }
 
-                //Moon phase
-                showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
-     
-                //Top Arc
-                dc.setPenWidth(3);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 60,120);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 70,110);
-                    
-                //Left Arc
-                dc.setPenWidth(3);
-                dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150,210);
+        if (!isInSleepMode) {
 
-                //Right Arc
-                dc.setPenWidth(3);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, -30,30);
+            if (battery >=20 ) {  
 
-            
-                //Bottom Arc
-                dc.setPenWidth(3);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240,300);
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250,290);
-                
-                //Numbers
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-                dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(center_x - radius * 0.93, center_y - radius * 0.12, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(center_x + radius * 0.93, center_y - radius * 0.12 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
+                if (!notificationExist && phoneConnected)  {    
 
-                //Date
-                var isShowDate = Properties.getValue("ShowDate"); 
-                var DateColor = Properties.getValue("DateColor") ; 
+                    //Red Moon
+                    var RedMoon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
+                    dc.drawBitmap(center_x, center_y, RedMoon) ;
 
-                if (isShowDate) {
-                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-                    dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
-                    dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);   
-                }     
-
-                //Second Right Arc ; seconds
-                var secArc = sec / 60.0 * 60.0;
-                var drawSecArc = -30 + secArc; 
-                dc.setPenWidth(5);
-                dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_RED);
-                dc.drawArc(center_x,center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, drawSecArc, 30);
-
-                dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
-                dc.drawText(center_x + radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  sec +"s", Graphics.TEXT_JUSTIFY_CENTER);
-            
-                
-                //Second Left Arc : battery
-                var batteryPercent = System.getSystemStats().battery / 100.0 * 60.0;
-                var drawBattery = 150 + batteryPercent;
-                dc.setPenWidth(5);
-                dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_RED);
-                dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, drawBattery,210);
+                    //Moon phase
+                    showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
         
-                dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
-                dc.drawText(center_x - radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  System.getSystemStats().battery.toNumber() +"%", Graphics.TEXT_JUSTIFY_CENTER);
+                    //Top Arc
+                    dc.setPenWidth(3);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 60,120);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 70,110);
+                        
+                    //Left Arc
+                    dc.setPenWidth(3);
+                    dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150,210);
 
-                //draw hour hand
-                dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-                dc.setPenWidth(4);
-                dc.drawLine(
-                    center_x + radius * 0.20 * Math.cos(hour_angle), 
-                    center_y + radius * 0.20 * Math.sin(hour_angle), 
-                    center_x + radius * 0.72 * Math.cos(hour_angle),
-                    center_y + radius * 0.72 * Math.sin(hour_angle)
-                );
+                    //Right Arc
+                    dc.setPenWidth(3);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, -30,30);
 
-                // draw the minute hand
-                dc.setColor((Graphics.COLOR_DK_GREEN ), Graphics.COLOR_TRANSPARENT);
-                dc.setPenWidth(4);
-                dc.drawLine(
-                    center_x + radius * 0.20 * Math.cos(minute_angle), 
-                    center_y + radius * 0.20 * Math.sin(minute_angle),
-                    center_x + radius * 0.90 * Math.cos(minute_angle),
-                    center_y + radius * 0.90 * Math.sin(minute_angle)
-                );
-            }
+                
+                    //Bottom Arc
+                    dc.setPenWidth(3);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240,300);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250,290);
+                    
+                    //Numbers
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
+                    dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.drawText(center_x - radius * 0.93, center_y - radius * 0.12, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.drawText(center_x + radius * 0.93, center_y - radius * 0.12 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
+
+                    //Date
+                    var isShowDate = Properties.getValue("ShowDate"); 
+                    var DateColor = Properties.getValue("DateColor") ; 
+
+                    if (isShowDate) {
+                        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
+                        dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
+                        dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);   
+                    }     
+
+                    //Second Right Arc ; seconds
+                    var secArc = sec / 60.0 * 60.0;
+                    var drawSecArc = -30 + secArc; 
+                    dc.setPenWidth(5);
+                    dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_RED);
+                    dc.drawArc(center_x,center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, drawSecArc, 30);
+
+                    dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(center_x + radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  sec +"s", Graphics.TEXT_JUSTIFY_CENTER);
+                
+                    
+                    //Second Left Arc : battery
+                    var batteryPercent = System.getSystemStats().battery / 100.0 * 60.0;
+                    var drawBattery = 150 + batteryPercent;
+                    dc.setPenWidth(5);
+                    dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_RED);
+                    dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, drawBattery,210);
             
-            if (notificationExist && phoneConnected)  {  
-                var notification = WatchUi.loadResource(Rez.Drawables.notification) ;
-                dc.drawBitmap(center_x - radius, center_y -radius, notification) ;
+                    dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(center_x - radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  System.getSystemStats().battery.toNumber() +"%", Graphics.TEXT_JUSTIFY_CENTER);
+
+                    //draw hour hand
+                    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+                    dc.setPenWidth(4);
+                    dc.drawLine(
+                        center_x + radius * 0.20 * Math.cos(hour_angle), 
+                        center_y + radius * 0.20 * Math.sin(hour_angle), 
+                        center_x + radius * 0.72 * Math.cos(hour_angle),
+                        center_y + radius * 0.72 * Math.sin(hour_angle)
+                    );
+
+                    // draw the minute hand
+                    dc.setColor((Graphics.COLOR_DK_GREEN ), Graphics.COLOR_TRANSPARENT);
+                    dc.setPenWidth(4);
+                    dc.drawLine(
+                        center_x + radius * 0.20 * Math.cos(minute_angle), 
+                        center_y + radius * 0.20 * Math.sin(minute_angle),
+                        center_x + radius * 0.90 * Math.cos(minute_angle),
+                        center_y + radius * 0.90 * Math.sin(minute_angle)
+                    );
+                }
+                
+                if (notificationExist && phoneConnected)  {  
+                    var notification = WatchUi.loadResource(Rez.Drawables.notification) ;
+                    dc.drawBitmap(center_x - radius, center_y -radius, notification) ;
+
+                    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
+                }  
+
+                if (!phoneConnected)  {  
+                    var connected = WatchUi.loadResource(Rez.Drawables.connected) ;
+                    dc.drawBitmap(center_x - radius, center_y -radius, connected) ;
+
+                    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
+                }  
+
+
+            }
+
+            if ((battery < 20) && (battery > 10) ) {       
+                var blackhole = WatchUi.loadResource(Rez.Drawables.blackhole) ;
+                dc.drawBitmap(center_x - radius, center_y -radius, blackhole) ;
 
                 dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
-            }  
+            }
 
-            if (!phoneConnected)  {  
-                var connected = WatchUi.loadResource(Rez.Drawables.connected) ;
-                dc.drawBitmap(center_x - radius, center_y -radius, connected) ;
+            if (battery <= 10) {       
+                var creature = WatchUi.loadResource(Rez.Drawables.creature) ;
+                dc.drawBitmap(center_x - radius, center_y -radius, creature) ;
 
                 dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
-            }  
-
-
-        }
-
-        if ((battery < 20) && (battery > 10) ) {       
-            var blackhole = WatchUi.loadResource(Rez.Drawables.blackhole) ;
-            dc.drawBitmap(center_x - radius, center_y -radius, blackhole) ;
-
-            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
-        }
-
-        if (battery <= 10) {       
-            var creature = WatchUi.loadResource(Rez.Drawables.creature) ;
-            dc.drawBitmap(center_x - radius, center_y -radius, creature) ;
-
-            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
+            }
         }
            
     }
@@ -212,10 +243,12 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
+        isInSleepMode = false;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        isInSleepMode = true;
     }
 
     function showMoonPhase(moonNumber,dc,x,y) {
