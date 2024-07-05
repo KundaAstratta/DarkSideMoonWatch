@@ -1,4 +1,10 @@
+<layouts>
 <layout id="WatchFace">
     <drawable class="Background" />
     <label id="TimeLabel" x="center" y="center" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_BLUE" />
 </layout>
+
+<layout id="QuickView">
+    <!-- Contenu de la mise en page, si nécessaire -->
+</layout>
+</layouts>

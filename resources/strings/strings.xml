@@ -5,6 +5,8 @@
     <string id="BackgroundColorTitle">Background Color</string>
     <string id="ShowDateTitle">Show Date ? </string>
     <string id="DateColorTitle">Date Color</string>
+    <string id="ThemeTitle">Theme</string>
+    <string id="NightModeTitle">Night Mode</string>
 
 
 
@@ -14,5 +16,10 @@
     <string id="ColorWhite">White</string>
     <string id="ColorBlue">Blue</string>
     <string id="ColorRed">Red</string>
+    <string id="ColorAdventure">Adventure</string>
+
+
+    <string id="ThemeRedGreen">Red/Green</string>
+    <string id="ThemeAdventure">Adventure</string>
 
 </strings>
