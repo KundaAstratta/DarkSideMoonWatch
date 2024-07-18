@@ -2,8 +2,12 @@
 
     <property id="BackgroundColor" type="number">0x000000</property>
     <property id="Theme" type="number">1</property>
+    <property id="AdventureSecondHand" type="boolean">false</property>
     <property id="DateColor" type="number">0xFFFFFF</property>
     <property id="ShowDate" type="boolean">false</property>
     <property id="NightMode" type="boolean">false</property>
+    <property id="NightModeBegin" type="number">22</property>
+    <property id="NightModeEnd" type="number">7</property>
+    <property id="StarsSky" type="boolean">false</property>
 
 </properties>

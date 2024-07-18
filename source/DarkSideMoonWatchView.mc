@@ -7,6 +7,14 @@ import Toybox.Time;
 import Toybox.Time.Gregorian;
 
 class DarkSideMoonWatchView extends WatchUi.WatchFace {
+    // Ajoutez ces variables pour les étoiles
+    var starX = [];
+    var starY = [];
+    var starSpeed = [];
+    var starCount = 20; // Nombre d'étoiles
+    var screenWidth;
+    var screenHeight;
+
     // 2 pi
     var TWO_PI = Math.PI * 2;
     //angle adjust for time hands
@@ -16,9 +24,55 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     //theme
     var theme = 1;
 
-
     function initialize() {
         WatchFace.initialize();
+        // Initialisation des étoiles
+        screenWidth = 320;
+        screenHeight = 320;
+        initializeStars();
+    }
+
+    function getRandom() {
+        var randomNumber = Math.rand()/32768.0/32768.0 - 1 ;
+        if (randomNumber < 0) {
+            System.print("ici");
+            System.println(-randomNumber);
+            return -randomNumber;
+        }
+        System.println("là");
+        System.println(randomNumber);
+        return randomNumber;
+       
+    }
+
+    // Initialiser les étoiles avec des positions aléatoires
+    function initializeStars() {
+        starX = new [starCount];
+        starY = new [starCount];
+        starSpeed = new [starCount];
+        for (var i = 0; i < starCount; i++) {
+            starX[i] = Math.floor(getRandom() * screenWidth);
+            starY[i] = Math.floor(getRandom() * screenHeight);
+            starSpeed[i] = 0.2;//getRandom() * 0.02 + 0.01; // Vitesse aléatoire
+        }
+    }
+
+    function updateStars() {
+        for (var i = 0; i < starCount; i++) {
+            starX[i] -= starSpeed[i]; // Déplacer l'étoile vers la gauche
+            if (starX[i] < 0) {
+                starX[i] = screenWidth; // Réinitialiser la position de l'étoile à droite
+                starY[i] = Math.floor(getRandom() * screenHeight); // Nouvelle position verticale aléatoire
+                starSpeed[i] = 0.2;//getRandom() * 0.02 + 0.01; // Nouvelle vitesse aléatoire
+            }
+        }
+    }
+
+    function drawStars(dc) {
+        dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
+        for (var i = 0; i < starCount; i++) {
+            dc.fillCircle(starX[i], starY[i], 3); // Dessiner un cercle blanc de rayon 2
+        }
     }
 
     // Load your resources here
@@ -89,14 +143,34 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         var isNightMode = Properties.getValue("NightMode"); 
 
+        //Main Here
+
+        //Noght mode ?
         if (isWithinTimeRange(hour,min, isNightMode)) {
-            drawHourandMinutesHandNight(dc,center_x,center_y,radius,hour_angle,minute_angle);            
+            //BasicTheme
+            if (!isAdventureTheme(theme)) {
+                drawHourandMinutesHandNight(dc,center_x,center_y,radius,hour_angle,minute_angle);   
+            } 
+            //Adventure Theme
+            if (isAdventureTheme(theme)) {
+                drawHourandMinutesHandAdventureNight(dc,center_x,center_y,radius,hour_angle,minute_angle);
+            }         
         } 
         
+        //To calculate if is normal mode or night mode
         if (!isWithinTimeRange(hour,min,isNightMode)) {
 
+            //Sleep Mode ?
             if (isInSleepMode) {
+                //Basic Theme
+                if (!isAdventureTheme(theme)) {
                 drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
+                }
+                //Adventure THeme
+                if (isAdventureTheme(theme)) {
+                    drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
+                }
+
             }
             if (!isInSleepMode) {
 
@@ -104,6 +178,29 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
                     if (!notificationExist && phoneConnected)  {   
                         normalLevelBatteryAndNotificationNotExistAndPhoneConnected(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                        //draw seconde hand only for adventure theme
+                        if (isAdventureTheme(theme)) {
+                            var isAdventureSecondHand = Properties.getValue("AdventureSecondHand"); 
+                            if (isAdventureSecondHand) {
+                                // Dessiner une ligne noire derrière l'aiguille des secondes
+                                dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+                                dc.setPenWidth(5); // Légèrement plus épaisse pour créer l'effet de contour
+                                dc.drawLine(
+                                    center_x,
+                                    center_y,
+                                    center_x + radius * 0.95 * Math.cos(seconde_angle),
+                                    center_y + radius * 0.95 * Math.sin(seconde_angle)
+                                );
+                                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+                                dc.setPenWidth(3);
+                                dc.drawLine(
+                                    center_x , 
+                                    center_y , 
+                                    center_x + radius * 0.95 * Math.cos(seconde_angle),
+                                    center_y + radius * 0.95 * Math.sin(seconde_angle)
+                                );
+                            }
+                        }
                     }
                     
                     if (notificationExist && phoneConnected)  {  
@@ -148,9 +245,22 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     function normalLevelBatteryAndNotificationNotExistAndPhoneConnected(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
        
+
+        //var isStarsSky = Properties.getValue("StarsSky"); 
+        var isStarsSky = false; 
+
+
+        if (isStarsSky) {
+            // Mise à jour des positions des étoiles
+            updateStars();
+
+            // Dessiner les étoiles
+            drawStars(dc);
+        }
         //Background Moon
         var RedMoon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
         dc.drawBitmap(center_x, center_y, RedMoon) ;
+
 
         //Moon phase
         showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
@@ -232,7 +342,14 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
         dc.drawText(center_x - radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  System.getSystemStats().battery.toNumber() +"%", Graphics.TEXT_JUSTIFY_CENTER);
 
-        drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);      
+        //Basic Theme
+        if (!isAdventureTheme(theme)) {
+            drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
+        }   
+        //Adventure Theme
+        if (isAdventureTheme(theme)) {
+            drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
+        }   
     }
 
     function normalLevelBatteryAndNotificationExistAndPhoneConnected(dc, center_x,center_y,radius,hour, min) {
@@ -241,7 +358,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         if (isAdventureTheme(theme)) {
-            dc.setColor(0x999999,Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -251,6 +368,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.drawBitmap(center_x - radius, center_y -radius, connected) ;
 
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        if (isAdventureTheme(theme)) {
+            dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
+        }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
 
@@ -261,7 +381,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         if (isAdventureTheme(theme)) {
-            dc.setColor(0x999999,Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -271,17 +391,169 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.drawBitmap(center_x - radius, center_y -radius, creature) ;
 
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        if (isAdventureTheme(theme)) {
+            dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
+        }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
 
+    function drawHourandMinutesHand(dc, center_x, center_y, radius, hour_angle, minute_angle) {
+        var handWidth = 4; 
+        var outlineWidth = 2; 
 
-    function drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle) {
-        //draw hour hand
+        // Aiguille des heures (avec contour blanc)
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(handWidth + outlineWidth * 2);
+
+        var hourHandLength = 0.65 * radius;
+        var hourHandBaseOffset = radius * 0.20; 
+        var hourHandTipOffset = hourHandLength * 0.70;
+
+        dc.drawLine(
+            center_x + hourHandBaseOffset * Math.cos(hour_angle),
+            center_y + hourHandBaseOffset * Math.sin(hour_angle),
+            center_x + (hourHandBaseOffset + hourHandTipOffset) * Math.cos(hour_angle),
+            center_y + (hourHandBaseOffset + hourHandTipOffset) * Math.sin(hour_angle)
+        );
+
+        dc.fillCircle(
+            center_x + hourHandBaseOffset * Math.cos(hour_angle),
+            center_y + hourHandBaseOffset * Math.sin(hour_angle),
+            (handWidth + outlineWidth) / 2 
+        );
+        dc.fillCircle(
+            center_x + (hourHandBaseOffset + hourHandTipOffset) * Math.cos(hour_angle),
+            center_y + (hourHandBaseOffset + hourHandTipOffset) * Math.sin(hour_angle),
+            (handWidth + outlineWidth) / 2 
+        );
+
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         if (isAdventureTheme(theme)) {
-            dc.setColor(0x999999,Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0x999999, Graphics.COLOR_TRANSPARENT);
         }
-        dc.setPenWidth(4);
+        dc.setPenWidth(handWidth); 
+        dc.drawLine(
+            center_x + hourHandBaseOffset * Math.cos(hour_angle),
+            center_y + hourHandBaseOffset * Math.sin(hour_angle),
+            center_x + (hourHandBaseOffset + hourHandTipOffset) * Math.cos(hour_angle),
+            center_y + (hourHandBaseOffset + hourHandTipOffset) * Math.sin(hour_angle)
+        );
+
+        dc.fillCircle( 
+            center_x + hourHandBaseOffset * Math.cos(hour_angle),
+            center_y + hourHandBaseOffset * Math.sin(hour_angle),
+            handWidth / 2
+        );
+        dc.fillCircle(
+            center_x + (hourHandBaseOffset + hourHandTipOffset) * Math.cos(hour_angle),
+            center_y + (hourHandBaseOffset + hourHandTipOffset) * Math.sin(hour_angle),
+            handWidth / 2
+        );
+
+        // Aiguille des minutes (avec contour blanc)
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(handWidth + outlineWidth * 2); 
+
+        var minuteHandLength = 0.85 * radius;
+        var minuteHandBaseOffset = radius * 0.20; 
+        var minuteHandTipOffset = minuteHandLength * 0.80; 
+
+        dc.drawLine(
+            center_x + minuteHandBaseOffset * Math.cos(minute_angle),
+            center_y + minuteHandBaseOffset * Math.sin(minute_angle),
+            center_x + (minuteHandBaseOffset + minuteHandTipOffset) * Math.cos(minute_angle),
+            center_y + (minuteHandBaseOffset + minuteHandTipOffset) * Math.sin(minute_angle)
+        );
+
+        dc.fillCircle(
+            center_x + minuteHandBaseOffset * Math.cos(minute_angle),
+            center_y + minuteHandBaseOffset * Math.sin(minute_angle),
+            (handWidth + outlineWidth) / 2 
+        );
+        dc.fillCircle(
+            center_x + (minuteHandBaseOffset + minuteHandTipOffset) * Math.cos(minute_angle),
+            center_y + (minuteHandBaseOffset + minuteHandTipOffset) * Math.sin(minute_angle),
+            (handWidth + outlineWidth) / 2
+        );
+
+        dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
+        if (isAdventureTheme(theme)) {
+            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+        }
+        dc.setPenWidth(handWidth);
+        dc.drawLine(
+            center_x + minuteHandBaseOffset * Math.cos(minute_angle),
+            center_y + minuteHandBaseOffset * Math.sin(minute_angle),
+            center_x + (minuteHandBaseOffset + minuteHandTipOffset) * Math.cos(minute_angle),
+            center_y + (minuteHandBaseOffset + minuteHandTipOffset) * Math.sin(minute_angle)
+        );
+
+        dc.fillCircle( 
+            center_x + minuteHandBaseOffset * Math.cos(minute_angle),
+            center_y + minuteHandBaseOffset * Math.sin(minute_angle),
+            handWidth / 2
+        );
+        dc.fillCircle(
+            center_x + (minuteHandBaseOffset + minuteHandTipOffset) * Math.cos(minute_angle),
+            center_y + (minuteHandBaseOffset + minuteHandTipOffset) * Math.sin(minute_angle),
+            handWidth / 2
+        );
+    }
+
+
+    function drawHourandMinutesHandAdventure(dc, center_x, center_y, radius, hour_angle, minute_angle) {
+        // Draw hour hand with black outline
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(12);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(hour_angle), 
+            center_y + radius * 0.20 * Math.sin(hour_angle), 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(hour_angle),
+            center_y + radius * 0.19 * Math.sin(hour_angle),
+            7
+        );
+        dc.fillCircle(
+            center_x + radius * 0.73 * Math.cos(hour_angle),
+            center_y + radius * 0.73 * Math.sin(hour_angle),
+            7
+        );
+
+        //draw hour hand
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(3);
+        dc.drawLine(
+            center_x , 
+            center_y , 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(10);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(hour_angle), 
+            center_y + radius * 0.20 * Math.sin(hour_angle), 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(hour_angle),
+            center_y + radius * 0.19 * Math.sin(hour_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.73 * Math.cos(hour_angle),
+            center_y + radius * 0.73 * Math.sin(hour_angle),
+            5
+        );
+        dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(6);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(hour_angle), 
             center_y + radius * 0.20 * Math.sin(hour_angle), 
@@ -289,21 +561,93 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             center_y + radius * 0.72 * Math.sin(hour_angle)
         );
 
-        // draw the minute hand
-        dc.setColor(Graphics.COLOR_DK_GREEN , Graphics.COLOR_TRANSPARENT);
-        if (isAdventureTheme(theme)) {
-            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT );
-        }
-        dc.setPenWidth(4);
+        // Draw minute hand with black outline
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(12);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(minute_angle), 
-            center_y + radius * 0.20 * Math.sin(minute_angle),
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
             center_x + radius * 0.90 * Math.cos(minute_angle),
             center_y + radius * 0.90 * Math.sin(minute_angle)
-        );   
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(minute_angle),
+            center_y + radius * 0.19 * Math.sin(minute_angle),
+            7
+        );
+        dc.fillCircle(
+            center_x + radius * 0.91 * Math.cos(minute_angle),
+            center_y + radius * 0.91 * Math.sin(minute_angle),
+            7
+        );
+
+        // draw the minute hand
+        dc.setColor((Graphics.COLOR_WHITE), Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(3);
+        dc.drawLine(
+            center_x , 
+            center_y ,
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );  
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(10);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(minute_angle), 
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(minute_angle),
+            center_y + radius * 0.19 * Math.sin(minute_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.91 * Math.cos(minute_angle),
+            center_y + radius * 0.91 * Math.sin(minute_angle),
+            5
+        );
+        dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(6);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(minute_angle), 
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );
+
+        //center
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            10
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            7
+        );
+        dc.setColor(0xAA5500,Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            8
+        );
+        dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            4
+        );        
     }
 
-        function drawHourandMinutesHandNight(dc,center_x,center_y,radius,hour_angle,minute_angle) {
+    function drawHourandMinutesHandNight(dc,center_x,center_y,radius,hour_angle,minute_angle) {
         //draw hour hand
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         dc.setPenWidth(4);
@@ -325,6 +669,152 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         );   
     }
 
+        function drawHourandMinutesHandAdventureNight(dc, center_x, center_y, radius, hour_angle, minute_angle) {
+        // Draw hour hand with black outline
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(12);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(hour_angle), 
+            center_y + radius * 0.20 * Math.sin(hour_angle), 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(hour_angle),
+            center_y + radius * 0.19 * Math.sin(hour_angle),
+            7
+        );
+        dc.fillCircle(
+            center_x + radius * 0.73 * Math.cos(hour_angle),
+            center_y + radius * 0.73 * Math.sin(hour_angle),
+            7
+        );
+
+        //draw hour hand
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(3);
+        dc.drawLine(
+            center_x , 
+            center_y , 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(10);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(hour_angle), 
+            center_y + radius * 0.20 * Math.sin(hour_angle), 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(hour_angle),
+            center_y + radius * 0.19 * Math.sin(hour_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.73 * Math.cos(hour_angle),
+            center_y + radius * 0.73 * Math.sin(hour_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(6);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(hour_angle), 
+            center_y + radius * 0.20 * Math.sin(hour_angle), 
+            center_x + radius * 0.72 * Math.cos(hour_angle),
+            center_y + radius * 0.72 * Math.sin(hour_angle)
+        );
+
+        // Draw minute hand with black outline
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(12);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(minute_angle), 
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(minute_angle),
+            center_y + radius * 0.19 * Math.sin(minute_angle),
+            7
+        );
+        dc.fillCircle(
+            center_x + radius * 0.91 * Math.cos(minute_angle),
+            center_y + radius * 0.91 * Math.sin(minute_angle),
+            7
+        );
+
+        // draw the minute hand
+        dc.setColor((Graphics.COLOR_DK_RED), Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(3);
+        dc.drawLine(
+            center_x , 
+            center_y ,
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );  
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(10);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(minute_angle), 
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.19 * Math.cos(minute_angle),
+            center_y + radius * 0.19 * Math.sin(minute_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x + radius * 0.91 * Math.cos(minute_angle),
+            center_y + radius * 0.91 * Math.sin(minute_angle),
+            5
+        );
+        dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(6);
+        dc.drawLine(
+            center_x + radius * 0.20 * Math.cos(minute_angle), 
+            center_y + radius * 0.20 * Math.sin(minute_angle), 
+            center_x + radius * 0.90 * Math.cos(minute_angle),
+            center_y + radius * 0.90 * Math.sin(minute_angle)
+        );
+
+        //center
+        dc.setColor(Graphics.COLOR_DK_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            10
+        );
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            7
+        );
+        dc.setColor(Graphics.COLOR_RED,Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            8
+        );
+        dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(
+            center_x ,
+            center_y ,
+            4
+        );
+    }
+
     function isAdventureTheme(theme) {
         if (theme == 2) {
             return true;
@@ -334,8 +824,12 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     function isWithinTimeRange(hours, minutes, nightMode) as Boolean {
         // Check if the time is within the range and in night mode
+        //var hoursNightModeBegin = Properties.getValue("NightModeBegin"); 
+        var hoursNightModeBegin = 22; 
+        //var hoursNightModeEnd = Properties.getValue("NightModeEnd"); 
+        var hoursNightModeEnd = 7; 
         if (nightMode) {
-            if ((hours >= 22) || (hours <= 7 && minutes <= 0)) {
+            if ((hours >= hoursNightModeBegin) || (hours < hoursNightModeEnd)) {
                 return true;
             } 
             return false;

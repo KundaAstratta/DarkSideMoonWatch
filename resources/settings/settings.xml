@@ -8,9 +8,17 @@
 
     <setting propertyKey="@Properties.Theme" title="@Strings.ThemeTitle">
         <settingConfig type="list">
-            <listEntry value="1">@Strings.ThemeRedGreen</listEntry>
+            <listEntry value="1">@Strings.ThemeBasic</listEntry>
             <listEntry value="2">@Strings.ThemeAdventure</listEntry>
         </settingConfig>
+    </setting>
+
+   <setting propertyKey="@Properties.AdventureSecondHand" title="@Strings.AdventureSecondHandTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+    <setting propertyKey="@Properties.ShowDate" title="@Strings.ShowDateTitle">
+        <settingConfig type="boolean" />
     </setting>
 
     <setting propertyKey="@Properties.DateColor" title="@Strings.DateColorTitle">
@@ -20,16 +28,36 @@
             <listEntry value="0xAAAAAA">@Strings.ColorLightGray</listEntry>
             <listEntry value="0x555555">@Strings.ColorDarkGray</listEntry>
             <listEntry value="0xAA5500">@Strings.ColorAdventure</listEntry>
-
         </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.ShowDate" title="@Strings.ShowDateTitle">
-        <settingConfig type="boolean" />
     </setting>
 
      <setting propertyKey="@Properties.NightMode" title="@Strings.NightModeTitle">
         <settingConfig type="boolean" />
     </setting>
 
+<!--
+    <setting propertyKey="@Properties.NightModeBegin" title="@Strings.NightModeBeginTitle">
+        <settingConfig type="List">
+            <listEntry value="21">@Strings.Hours21</listEntry>
+            <listEntry value="22">@Strings.Hours22</listEntry>
+            <listEntry value="23">@Strings.Hours23</listEntry>
+            <listEntry value="24">@Strings.Hours24</listEntry>
+        </settingConfig>
+    </setting>
+
+     <setting propertyKey="@Properties.NightModeEnd" title="@Strings.NightModeEndTitle">
+        <settingConfig type="List">
+            <listEntry value="5">@Strings.Hours5</listEntry>
+            <listEntry value="6">@Strings.Hours6</listEntry>
+            <listEntry value="7">@Strings.Hours7</listEntry>
+            <listEntry value="0">@Strings.Hours8</listEntry>
+        </settingConfig>
+    </setting>
+-->
+
+<!--
+     <setting propertyKey="@Properties.StarsSky" title="@Strings.StarsSkyTitle">
+        <settingConfig type="boolean" />
+    </setting>
+-->
 </settings>
