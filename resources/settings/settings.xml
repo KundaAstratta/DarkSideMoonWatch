@@ -35,7 +35,7 @@
         <settingConfig type="boolean" />
     </setting>
 
-<!--
+
     <setting propertyKey="@Properties.NightModeBegin" title="@Strings.NightModeBeginTitle">
         <settingConfig type="List">
             <listEntry value="21">@Strings.Hours21</listEntry>
@@ -50,10 +50,10 @@
             <listEntry value="5">@Strings.Hours5</listEntry>
             <listEntry value="6">@Strings.Hours6</listEntry>
             <listEntry value="7">@Strings.Hours7</listEntry>
-            <listEntry value="0">@Strings.Hours8</listEntry>
+            <listEntry value="8">@Strings.Hours8</listEntry>
         </settingConfig>
     </setting>
--->
+
 
 <!--
      <setting propertyKey="@Properties.StarsSky" title="@Strings.StarsSkyTitle">

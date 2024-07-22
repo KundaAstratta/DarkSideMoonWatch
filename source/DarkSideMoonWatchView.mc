@@ -824,10 +824,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     function isWithinTimeRange(hours, minutes, nightMode) as Boolean {
         // Check if the time is within the range and in night mode
-        //var hoursNightModeBegin = Properties.getValue("NightModeBegin"); 
-        var hoursNightModeBegin = 22; 
-        //var hoursNightModeEnd = Properties.getValue("NightModeEnd"); 
-        var hoursNightModeEnd = 7; 
+        var hoursNightModeBegin = Properties.getValue("NightModeBegin"); 
+        //var hoursNightModeBegin = 22; 
+        var hoursNightModeEnd = Properties.getValue("NightModeEnd"); 
+        //var hoursNightModeEnd = 7; 
         if (nightMode) {
             if ((hours >= hoursNightModeBegin) || (hours < hoursNightModeEnd)) {
                 return true;
