@@ -261,38 +261,62 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         var RedMoon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
         dc.drawBitmap(center_x, center_y, RedMoon) ;
 
+        // Dessiner les tirets pour les heures spécifiées
+        var isShowMinuteMarkers = Properties.getValue("ShowMinuteMarkers"); 
+        if (isShowMinuteMarkers) {
+            drawHourMarkers(dc, center_x, center_y, radius);
+        }
 
         //Moon phase
         showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
 
-        //Top Arc
-        dc.setPenWidth(3);
+        // Top Arc
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT); // Contour noir en premier
+        dc.setPenWidth(7); // Dessiner le contour plus large
+        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 60, 120);
+        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 70, 110);
+
+        // Dessiner les arcs blancs par-dessus le contour noir
+        dc.setPenWidth(3); 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 60,120);
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 70,110);
-            
-        //Left Arc
+        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 60, 120);
+        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 70, 110);
+
+        // Left Arc
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT); // Contour noir
+        dc.setPenWidth(7);
+        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150, 210);
+
+        // Dessiner l'arc de couleur par-dessus
         dc.setPenWidth(3);
         dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
         if (isAdventureTheme(theme)) {
-            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT );
+            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
         }
-        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150,210);
+        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150, 210);
 
-        //Right Arc
+        // Right Arc
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT); // Contour noir
+        dc.setPenWidth(7);
+        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, -30, 30);
+
+        // Dessiner l'arc blanc par-dessus
         dc.setPenWidth(3);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, -30,30);
+        dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, -30, 30);
 
-    
-        //Bottom Arc
-        dc.setPenWidth(3);
+        // Bottom Arc
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT); // Contour noir
+        dc.setPenWidth(7);
+        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240, 300);
+        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250, 290);
+
+        // Dessiner les arcs blancs par-dessus
+        dc.setPenWidth(3); 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240,300);
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250,290);
-        
+        dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240, 300);
+        dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250, 290);
+
         //Numbers
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);         
         if (isAdventureTheme(theme)) {
@@ -300,8 +324,8 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         } 
         dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(center_x - radius * 0.93, center_y - radius * 0.12, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(center_x + radius * 0.93, center_y - radius * 0.12 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(center_x - radius * 0.93, center_y - radius * 0.13, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(center_x + radius * 0.93, center_y - radius * 0.13 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
 
         //Date
         var isShowDate = Properties.getValue("ShowDate"); 
@@ -835,6 +859,123 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             return false;
         } 
         return false;
+    }
+
+/*
+    function drawHourMarkers(dc, center_x, center_y, radius) {
+        var markerHours = [1, 2, 4, 5, 7, 8, 10, 11]; // Heures avec tirets
+        var markerLength = 0.10 * radius; // Longueur des tirets
+        var markerOffset = 0.95 * radius; // Distance du centre 
+        var smallMarkerLength = 0.025 * radius; // Longueur des petits tirets
+
+        for (var i = 0; i < 8; i++) { // Utilisation de la constante ici
+            var angle = ((markerHours[i] % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
+            var startX = center_x + markerOffset * Math.cos(angle);
+            var startY = center_y + markerOffset * Math.sin(angle);
+            var endX = center_x + (markerOffset - markerLength) * Math.cos(angle);
+            var endY = center_y + (markerOffset - markerLength) * Math.sin(angle);
+
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            if (isAdventureTheme(theme)) {
+                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+            }
+            dc.setPenWidth(4); // Épaisseur des tirets
+            dc.drawLine(startX, startY, endX, endY);
+
+            // Dessiner les 4 petits tirets entre les heures
+            var nextHour = (hour + 1) % 12;
+            var nextAngle = ((nextHour % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
+            var angleIncrement = (nextAngle - angle) / 5; // 5 segments (4 tirets + 1 espace)
+
+            for (var j = 1; j < 5; j++) {
+                var smallMarkerAngle = angle + j * angleIncrement;
+                var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
+                var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
+                var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
+                var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
+
+                dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
+            }
+
+            
+        }
+    }
+*/
+    // Nouvelle fonction pour dessiner les tirets
+    function drawHourMarkers(dc, center_x, center_y, radius) {
+        var markerHours = [1, 2, 4, 5, 7, 8, 10, 11]; // Heures avec tirets principaux
+        var mainMarkerLength = 0.10 * radius; // Longueur des tirets principaux
+        var smallMarkerLength = 0.025 * radius; // Longueur des petits tirets
+        var markerOffset = 0.95 * radius; // Distance du centre 
+
+        // Dessiner les tirets pour toutes les heures et les petits tirets entre eux
+        for (var hour = 0; hour < 12; hour++) {
+            var angle = ((hour % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
+
+
+            // Dessiner le contour noir pour le tiret principal
+            if (markerHours.indexOf(hour) != -1) {
+                drawMarkerWithOutline(dc, center_x, center_y, markerOffset, angle, mainMarkerLength, 6, 4);
+            }
+
+            // Dessiner les contours noirs pour les petits tirets entre les heures
+            for (var j = 1; j < 5; j++) {
+                var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
+                drawMarkerWithOutline(dc, center_x, center_y, markerOffset, smallMarkerAngle, smallMarkerLength, 6, 4);
+            }
+
+            // Dessiner le tiret principal si l'heure est dans markerHours
+            if (markerHours.indexOf(hour) != -1) {
+                var startX = center_x + markerOffset * Math.cos(angle);
+                var startY = center_y + markerOffset * Math.sin(angle);
+                var endX = center_x + (markerOffset - mainMarkerLength) * Math.cos(angle);
+                var endY = center_y + (markerOffset - mainMarkerLength) * Math.sin(angle);
+                dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+                if (isAdventureTheme(theme)) {
+                    dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+                }
+                dc.setPenWidth(4); // Épaisseur des tiretsf
+                dc.drawLine(startX, startY, endX, endY);
+            }
+
+            // Dessiner les petits tirets entre les heures
+            for (var j = 1; j < 5; j++) {
+                var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
+                var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
+                var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
+                var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
+                var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
+
+                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                if (isAdventureTheme(theme)) {
+                    dc.setColor(0x999999, Graphics.COLOR_TRANSPARENT);
+                }
+                dc.setPenWidth(4); // Épaisseur des tirets
+                dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
+            }
+        }
+    }
+
+    // Fonction pour dessiner un tiret avec un contour noir
+    function drawMarkerWithOutline(dc, centerX, centerY, offset, angle, length, outlineWidth, fillWidth) {
+        // Calculer les points de départ et de fin du tiret
+        var startX = centerX + offset * Math.cos(angle);
+        var startY = centerY + offset * Math.sin(angle);
+        var endX = centerX + (offset - length) * Math.cos(angle);
+        var endY = centerY + (offset - length) * Math.sin(angle);
+
+        // Dessiner le contour noir
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(outlineWidth);
+        dc.drawLine(startX, startY, endX, endY);
+
+        // Dessiner le tiret intérieur coloré
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        if (isAdventureTheme(theme)) {
+            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+        }
+        dc.setPenWidth(fillWidth);
+        dc.drawLine(startX, startY, endX, endY);
     }
 
     function showMoonPhase(moonNumber,dc,x,y) {

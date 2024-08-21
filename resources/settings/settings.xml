@@ -17,6 +17,10 @@
         <settingConfig type="boolean" />
     </setting>
 
+   <setting propertyKey="@Properties.ShowMinuteMarkers" title="@Strings.ShowMinuteMarkersTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
     <setting propertyKey="@Properties.ShowDate" title="@Strings.ShowDateTitle">
         <settingConfig type="boolean" />
     </setting>
