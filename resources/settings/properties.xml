@@ -1,6 +1,8 @@
 <properties>
 
     <property id="BackgroundColor" type="number">0x000000</property>
+    <property id="RedMoon" type="boolean">false</property>
+    <property id="MainMarkers" type="boolean">false</property>
     <property id="Theme" type="number">2</property>
     <property id="AdventureSecondHand" type="boolean">false</property>
     <property id="DateColor" type="number">0xFFFFFF</property>

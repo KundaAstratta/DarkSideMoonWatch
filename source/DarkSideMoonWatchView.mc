@@ -258,8 +258,13 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             drawStars(dc);
         }
         //Background Moon
-        var RedMoon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
-        dc.drawBitmap(center_x, center_y, RedMoon) ;
+        var Moon = WatchUi.loadResource(Rez.Drawables.whitemoon) ;
+        dc.drawBitmap(center_x, center_y, Moon) ;
+        var redmoonbackground = Properties.getValue("RedMoon");
+        if (redmoonbackground) {
+            Moon = WatchUi.loadResource(Rez.Drawables.redmoon) ;
+            dc.drawBitmap(center_x, center_y, Moon) ;
+        }
 
         // Dessiner les tirets pour les heures spécifiées
         var isShowMinuteMarkers = Properties.getValue("ShowMinuteMarkers"); 
@@ -317,16 +322,58 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240, 300);
         dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250, 290);
 
+        // Numbers (avec contour noir pour 3 et 6)
+        var outlineWidth = 1; // Épaisseur du contour noir
+        var numbersWithOutline = [3, 6];
+
         //Numbers
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);         
         if (isAdventureTheme(theme)) {
             dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT );
         } 
-        dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(center_x - radius * 0.93, center_y - radius * 0.13, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(center_x + radius * 0.93, center_y - radius * 0.13 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
 
+        //dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
+        //dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
+        //dc.drawText(center_x - radius * 0.93, center_y - radius * 0.13, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
+        //dc.drawText(center_x + radius * 0.93, center_y - radius * 0.13 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
+
+        for (var i = 0; i < 12; i++) {
+            var hourText = (i == 0) ? "12" : i.toString(); // Afficher "12" pour l'heure 0
+            var angle = ((i % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
+            var textX = 0; 
+            var textY = 0;
+
+            if (i == 0) { // 12 en haut
+                textX = center_x;
+                textY = center_y - radius;
+            } else if (i == 3) { // 3 à droite
+                textX = center_x + radius * 0.93;
+                textY = center_y - radius * 0.13;
+            } else if (i == 6) { // 6 en bas
+                textX = center_x;
+                textY = center_y + radius * 0.75;
+            } else if (i == 9) { // 9 à gauche
+                textX = center_x - radius * 0.93;
+                textY = center_y - radius * 0.13;
+            }
+
+            // Dessiner le contour noir si l'heure est dans numbersWithOutline
+            if (numbersWithOutline.indexOf(i) != -1) {
+                dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+                dc.drawText(textX + outlineWidth, textY - outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(textX - outlineWidth, textY + outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(textX + outlineWidth, textY + outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(textX - outlineWidth, textY - outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
+            }
+
+            // Dessiner le texte de l'heure par-dessus le contour
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            if (isAdventureTheme(theme)) {
+                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+            }
+            dc.drawText(textX, textY, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
+        }
+        
         //Date
         var isShowDate = Properties.getValue("ShowDate"); 
         var DateColor = Properties.getValue("DateColor") ; 
@@ -861,52 +908,13 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         return false;
     }
 
-/*
-    function drawHourMarkers(dc, center_x, center_y, radius) {
-        var markerHours = [1, 2, 4, 5, 7, 8, 10, 11]; // Heures avec tirets
-        var markerLength = 0.10 * radius; // Longueur des tirets
-        var markerOffset = 0.95 * radius; // Distance du centre 
-        var smallMarkerLength = 0.025 * radius; // Longueur des petits tirets
-
-        for (var i = 0; i < 8; i++) { // Utilisation de la constante ici
-            var angle = ((markerHours[i] % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
-            var startX = center_x + markerOffset * Math.cos(angle);
-            var startY = center_y + markerOffset * Math.sin(angle);
-            var endX = center_x + (markerOffset - markerLength) * Math.cos(angle);
-            var endY = center_y + (markerOffset - markerLength) * Math.sin(angle);
-
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            if (isAdventureTheme(theme)) {
-                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-            }
-            dc.setPenWidth(4); // Épaisseur des tirets
-            dc.drawLine(startX, startY, endX, endY);
-
-            // Dessiner les 4 petits tirets entre les heures
-            var nextHour = (hour + 1) % 12;
-            var nextAngle = ((nextHour % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
-            var angleIncrement = (nextAngle - angle) / 5; // 5 segments (4 tirets + 1 espace)
-
-            for (var j = 1; j < 5; j++) {
-                var smallMarkerAngle = angle + j * angleIncrement;
-                var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
-                var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
-                var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
-                var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
-
-                dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
-            }
-
-            
-        }
-    }
-*/
     // Nouvelle fonction pour dessiner les tirets
     function drawHourMarkers(dc, center_x, center_y, radius) {
         var markerHours = [1, 2, 4, 5, 7, 8, 10, 11]; // Heures avec tirets principaux
         var mainMarkerLength = 0.10 * radius; // Longueur des tirets principaux
         var smallMarkerLength = 0.025 * radius; // Longueur des petits tirets
         var markerOffset = 0.95 * radius; // Distance du centre 
+        var mainMarkers = Properties.getValue("MainMarkers");
 
         // Dessiner les tirets pour toutes les heures et les petits tirets entre eux
         for (var hour = 0; hour < 12; hour++) {
@@ -919,10 +927,12 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
 
             // Dessiner les contours noirs pour les petits tirets entre les heures
-            for (var j = 1; j < 5; j++) {
-                var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
-                drawMarkerWithOutline(dc, center_x, center_y, markerOffset, smallMarkerAngle, smallMarkerLength, 6, 4);
-            }
+            if (!mainMarkers) {
+                for (var j = 1; j < 5; j++) {
+                    var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
+                    drawMarkerWithOutline(dc, center_x, center_y, markerOffset, smallMarkerAngle, smallMarkerLength, 6, 4);
+                }
+            } 
 
             // Dessiner le tiret principal si l'heure est dans markerHours
             if (markerHours.indexOf(hour) != -1) {
@@ -939,19 +949,21 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
 
             // Dessiner les petits tirets entre les heures
-            for (var j = 1; j < 5; j++) {
-                var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
-                var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
-                var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
-                var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
-                var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
+            if (!mainMarkers) {
+                for (var j = 1; j < 5; j++) {
+                    var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
+                    var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
+                    var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
+                    var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
+                    var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
 
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                if (isAdventureTheme(theme)) {
-                    dc.setColor(0x999999, Graphics.COLOR_TRANSPARENT);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    if (isAdventureTheme(theme)) {
+                        dc.setColor(0x999999, Graphics.COLOR_TRANSPARENT);
+                    }
+                    dc.setPenWidth(4); // Épaisseur des tirets
+                    dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
                 }
-                dc.setPenWidth(4); // Épaisseur des tirets
-                dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
             }
         }
     }

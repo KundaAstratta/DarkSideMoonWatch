@@ -6,6 +6,10 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.RedMoon" title="@Strings.RedMoonTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
     <setting propertyKey="@Properties.Theme" title="@Strings.ThemeTitle">
         <settingConfig type="list">
             <listEntry value="1">@Strings.ThemeBasic</listEntry>
@@ -18,6 +22,10 @@
     </setting>
 
    <setting propertyKey="@Properties.ShowMinuteMarkers" title="@Strings.ShowMinuteMarkersTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
+    <setting propertyKey="@Properties.MainMarkers" title="@Strings.MainMarkersTitle">
         <settingConfig type="boolean" />
     </setting>
 

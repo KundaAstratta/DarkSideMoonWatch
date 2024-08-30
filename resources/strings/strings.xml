@@ -3,11 +3,13 @@
     <string id="AppName">DarkSideMoonWatch</string>
 
     <string id="BackgroundColorTitle">Background Color</string>
+    <string id="RedMoonTitle">Red Moon Background ?</string>
     <string id="ShowDateTitle">Show Date </string>
     <string id="DateColorTitle">Date Color</string>
     <string id="ThemeTitle">Theme</string>
     <string id="AdventureSecondHandTitle">Adventure Second Hand</string>
     <string id="ShowMinuteMarkersTitle">Show Minute Markers</string>
+    <string id="MainMarkersTitle">Only Main Markers</string>
     <string id="NightModeTitle">Night Mode</string>
     <string id="NightModeBeginTitle">Night Mode Begin</string>
     <string id="NightModeEndTitle">Night Mode End</string>

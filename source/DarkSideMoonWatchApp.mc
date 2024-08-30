@@ -17,8 +17,8 @@ class DarkSideMoonWatchApp extends Application.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() as Array<Views or InputDelegates>? {
-        return [ new DarkSideMoonWatchView() ] as Array<Views or InputDelegates>;
+    function getInitialView() as [Views] or [Views, InputDelegates] {
+        return [ new DarkSideMoonWatchView() ];
     }
 
     // New app settings have been received so trigger a UI update

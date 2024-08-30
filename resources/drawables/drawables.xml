@@ -6,6 +6,7 @@
     <bitmap id="blackhole" filename="blackhole.jpeg" />
     <bitmap id="notification" filename="notification.jpeg" />
     <bitmap id="connected" filename="connected.jpeg" />
+    <bitmap id="whitemoon" filename="WhiteMoon.png" />
     <bitmap id="redmoon" filename="RedMoon.png" />
     <bitmap id="newMoon" filename="newMoon.png" />
     <bitmap id="waningCrescent" filename="waningCrescent.png" />
