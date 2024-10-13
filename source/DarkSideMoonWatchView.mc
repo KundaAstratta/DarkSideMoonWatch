@@ -125,6 +125,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         } else {
             notificationExist = true;
         }
+        var pictureNotification = Properties.getValue("PictureNotification"); 
 
         var phoneConnected = System.getDeviceSettings().phoneConnected;
 
@@ -164,7 +165,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (isInSleepMode) {
                 //Basic Theme
                 if (!isAdventureTheme(theme)) {
-                drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
+                    drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
                 }
                 //Adventure THeme
                 if (isAdventureTheme(theme)) {
@@ -177,34 +178,17 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 if (battery >=20) {  
 
                     if (!notificationExist && phoneConnected)  {   
-                        normalLevelBatteryAndNotificationNotExistAndPhoneConnected(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
-                        //draw seconde hand only for adventure theme
-                        if (isAdventureTheme(theme)) {
-                            var isAdventureSecondHand = Properties.getValue("AdventureSecondHand"); 
-                            if (isAdventureSecondHand) {
-                                // Dessiner une ligne noire derrière l'aiguille des secondes
-                                dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-                                dc.setPenWidth(5); // Légèrement plus épaisse pour créer l'effet de contour
-                                dc.drawLine(
-                                    center_x,
-                                    center_y,
-                                    center_x + radius * 0.95 * Math.cos(seconde_angle),
-                                    center_y + radius * 0.95 * Math.sin(seconde_angle)
-                                );
-                                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-                                dc.setPenWidth(3);
-                                dc.drawLine(
-                                    center_x , 
-                                    center_y , 
-                                    center_x + radius * 0.95 * Math.cos(seconde_angle),
-                                    center_y + radius * 0.95 * Math.sin(seconde_angle)
-                                );
-                            }
-                        }
+                        normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
                     }
                     
                     if (notificationExist && phoneConnected)  {  
-                        normalLevelBatteryAndNotificationExistAndPhoneConnected(dc, center_x,center_y,radius,hour, min);
+                        if (pictureNotification) { 
+                            normalLevelBatteryAndNotificationExistAndPhoneConnected(dc, center_x,center_y,radius,hour, min);
+                        }
+                        if (!pictureNotification) {
+                            normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            iconNotification(dc, center_x,center_y,radius);
+                        }
                     }  
 
                     if (!phoneConnected)  {  
@@ -214,7 +198,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 }
 
                 if ((battery < 20) && (battery > 10) ) {  
-                ifBatteryBetweenTenAndTwenty(dc,battery, center_x,center_y, radius, hour, min);
+                    ifBatteryBetweenTenAndTwenty(dc,battery, center_x,center_y, radius, hour, min);
                 }
 
                 if (battery <= 10) {     
@@ -243,7 +227,25 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         isInSleepMode = true;
     }
 
-    function normalLevelBatteryAndNotificationNotExistAndPhoneConnected(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
+    function iconNotification(dc, center_x,center_y,radius) {
+        //Icone Notification
+        // Position de l'icône de la cloche (à ajuster selon vos préférences)
+        var iconX = center_x;
+        var iconY = center_y - radius * 0.65;
+        var iconSize = 20;
+        var outlineWidthNotification = 2; // Épaisseur du contour noir
+
+        // Dessiner le contour noir du cercle
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2 + outlineWidthNotification);
+
+        // Dessiner le cercle blanc par-dessus le contour
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2);
+        //Icon Notification
+    }
+
+    function normalWatchFace(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
        
 
         //var isStarsSky = Properties.getValue("StarsSky"); 
@@ -257,6 +259,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             // Dessiner les étoiles
             drawStars(dc);
         }
+        
         //Background Moon
         var Moon = WatchUi.loadResource(Rez.Drawables.whitemoon) ;
         dc.drawBitmap(center_x, center_y, Moon) ;
@@ -413,6 +416,24 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
         dc.drawText(center_x - radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  System.getSystemStats().battery.toNumber() +"%", Graphics.TEXT_JUSTIFY_CENTER);
 
+
+        //Icone No Bluetooth
+        /*
+        var iconX = center_x;
+        var iconY = center_y + radius * 0.65;
+        var iconSize = 20;
+        var outlineWidthBluetooth = 2; // Épaisseur du contour noir
+
+        // Dessiner le contour noir du cercle
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2 + outlineWidthBluetooth);
+
+        // Dessiner le cercle rouge par-dessus le contour
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2);
+        */
+        //Icon No Bluetooh
+
         //Basic Theme
         if (!isAdventureTheme(theme)) {
             drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
@@ -420,6 +441,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         //Adventure Theme
         if (isAdventureTheme(theme)) {
             drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
+        }
+        //draw seconde hand only for adventure theme
+        if (isAdventureTheme(theme)) {
+            drawSecondHandAdventure(dc,center_x,center_y,radius, sec / 60.0 * TWO_PI - ANGLE_ADJUST);
         }   
     }
 
@@ -569,6 +594,30 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             center_y + (minuteHandBaseOffset + minuteHandTipOffset) * Math.sin(minute_angle),
             handWidth / 2
         );
+    }
+
+    // Draw second here
+    function drawSecondHandAdventure(dc, center_x, center_y, radius, seconde_angle) {
+        var isAdventureSecondHand = Properties.getValue("AdventureSecondHand"); 
+        if (isAdventureSecondHand) {
+            // Dessiner une ligne noire derrière l'aiguille des secondes
+            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(5); // Légèrement plus épaisse pour créer l'effet de contour
+            dc.drawLine(
+                center_x,
+                center_y,
+                center_x + radius * 0.95 * Math.cos(seconde_angle),
+                center_y + radius * 0.95 * Math.sin(seconde_angle)
+            );
+            dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(3);
+            dc.drawLine(
+                center_x , 
+                center_y , 
+                center_x + radius * 0.95 * Math.cos(seconde_angle),
+                center_y + radius * 0.95 * Math.sin(seconde_angle)
+            );
+        }
     }
 
 

@@ -66,6 +66,10 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.PictureNotification" title="@Strings.PictureNotificationTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
 
 <!--
      <setting propertyKey="@Properties.StarsSky" title="@Strings.StarsSkyTitle">
