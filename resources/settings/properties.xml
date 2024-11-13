@@ -11,7 +11,6 @@
     <property id="NightMode" type="boolean">false</property>
     <property id="NightModeBegin" type="number">22</property>
     <property id="NightModeEnd" type="number">7</property>
-    <property id="StarsSky" type="boolean">false</property>
     <property id="PictureNotification" type="boolean">true</property>
-
+    <property id="PulsationNotification" type="boolean">false</property>
 </properties>

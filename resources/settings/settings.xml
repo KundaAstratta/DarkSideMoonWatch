@@ -70,10 +70,8 @@
         <settingConfig type="boolean" />
     </setting>
 
-
-<!--
-     <setting propertyKey="@Properties.StarsSky" title="@Strings.StarsSkyTitle">
+    <setting propertyKey="@Properties.PulsationNotification" title="@Strings.PulsationNotificationTitle">
         <settingConfig type="boolean" />
     </setting>
--->
+
 </settings>

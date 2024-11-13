@@ -13,8 +13,8 @@
     <string id="NightModeTitle">Night Mode</string>
     <string id="NightModeBeginTitle">Night Mode Begin</string>
     <string id="NightModeEndTitle">Night Mode End</string>
-    <string id="StarsSkyTitle"> Stars Background</string>
     <string id="PictureNotificationTitle">Image when notification</string>
+    <string id="PulsationNotificationTitle">Pulsation with bubble notification</string>
 
 
 

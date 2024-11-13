@@ -7,13 +7,10 @@ import Toybox.Time;
 import Toybox.Time.Gregorian;
 
 class DarkSideMoonWatchView extends WatchUi.WatchFace {
-    // Ajoutez ces variables pour les étoiles
-    var starX = [];
-    var starY = [];
-    var starSpeed = [];
-    var starCount = 20; // Nombre d'étoiles
-    var screenWidth;
-    var screenHeight;
+    // Variables pour l'animation de pulsation (à l'extérieur de la fonction)
+    var pulseSize = 0;
+    var pulseDirection = 1; // 1 pour augmenter, -1 pour diminuer
+    var explosionPixels = []; // Tableau pour stocker les pixels de l'explosion
 
     // 2 pi
     var TWO_PI = Math.PI * 2;
@@ -26,10 +23,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     function initialize() {
         WatchFace.initialize();
-        // Initialisation des étoiles
-        screenWidth = 320;
-        screenHeight = 320;
-        initializeStars();
     }
 
     function getRandom() {
@@ -43,36 +36,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         System.println(randomNumber);
         return randomNumber;
        
-    }
-
-    // Initialiser les étoiles avec des positions aléatoires
-    function initializeStars() {
-        starX = new [starCount];
-        starY = new [starCount];
-        starSpeed = new [starCount];
-        for (var i = 0; i < starCount; i++) {
-            starX[i] = Math.floor(getRandom() * screenWidth);
-            starY[i] = Math.floor(getRandom() * screenHeight);
-            starSpeed[i] = 0.2;//getRandom() * 0.02 + 0.01; // Vitesse aléatoire
-        }
-    }
-
-    function updateStars() {
-        for (var i = 0; i < starCount; i++) {
-            starX[i] -= starSpeed[i]; // Déplacer l'étoile vers la gauche
-            if (starX[i] < 0) {
-                starX[i] = screenWidth; // Réinitialiser la position de l'étoile à droite
-                starY[i] = Math.floor(getRandom() * screenHeight); // Nouvelle position verticale aléatoire
-                starSpeed[i] = 0.2;//getRandom() * 0.02 + 0.01; // Nouvelle vitesse aléatoire
-            }
-        }
-    }
-
-    function drawStars(dc) {
-        dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
-        for (var i = 0; i < starCount; i++) {
-            dc.fillCircle(starX[i], starY[i], 3); // Dessiner un cercle blanc de rayon 2
-        }
     }
 
     // Load your resources here
@@ -143,6 +106,21 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
 
         var isNightMode = Properties.getValue("NightMode"); 
+
+        // Mettre à jour la taille de la pulsation
+        pulseSize += pulseDirection*5;
+        if (pulseSize >= 20) { // Ajuster la valeur maximale de la pulsation
+            pulseDirection = -1;
+
+            // Créer les pixels de l'explosion
+            createExplosionPixels(center_x, center_y - radius * 0.65, 10); 
+            
+        } else if (pulseSize <= 0) {
+            pulseDirection = 1;
+
+            explosionPixels = []; // Réinitialiser les pixels d'explosion
+
+        }
 
         //Main Here
 
@@ -227,39 +205,72 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         isInSleepMode = true;
     }
 
-    function iconNotification(dc, center_x,center_y,radius) {
-        //Icone Notification
-        // Position de l'icône de la cloche (à ajuster selon vos préférences)
+    function iconNotification(dc, center_x, center_y, radius) {
+        var pulsationNotification = Properties.getValue("PulsationNotification");
         var iconX = center_x;
         var iconY = center_y - radius * 0.65;
         var iconSize = 20;
-        var outlineWidthNotification = 2; // Épaisseur du contour noir
+        if (pulsationNotification) {
+            iconSize = 5 + pulseSize;
+        }
+        var outlineWidthNotification = 2;
+
+        // Si l'icône est en train d'exploser
+        if (pulsationNotification) {
+            if (explosionPixels.size() > 0) {
+                drawExplosion(dc, explosionPixels);
+                return; // Ne pas dessiner l'icône normale
+            }
+        }
 
         // Dessiner le contour noir du cercle
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.fillCircle(iconX, iconY, iconSize / 2 + outlineWidthNotification);
 
-        // Dessiner le cercle blanc par-dessus le contour
+        // Dessiner le cercle rouge par-dessus le contour
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.fillCircle(iconX, iconY, iconSize / 2);
-        //Icon Notification
+    }
+
+    function drawExplosion(dc, pixels) {
+        var i = 0;
+        while (i < pixels.size()) {
+            var pixel = pixels[i];
+            pixel["x"] += pixel["dx"];
+            pixel["y"] += pixel["dy"];
+            pixel["size"] -= 0.1; // Diminuer la taille
+            pixel["opacity"] -= 10; // Diminuer l'opacité
+
+            // Dessiner le pixel avec l'opacité actuelle
+            dc.setColor(Graphics.COLOR_WHITE, pixel["opacity"]); 
+            dc.fillCircle(pixel["x"], pixel["y"], pixel["size"]);
+
+            // Supprimer le pixel s'il est trop petit ou transparent
+            if (pixel["size"] <= 0 || pixel["opacity"] <= 0) {
+                pixels.remove(i);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    function createExplosionPixels(x, y, count) {
+        explosionPixels = new [count];
+        for (var i = 0; i < count; i++) {
+            var pixel = {};
+            pixel["x"] = x + (Math.rand() % 10 - 5); // Ajouter un décalage aléatoire en x
+            pixel["y"] = y + (Math.rand() % 10 - 5); // Ajouter un décalage aléatoire en y
+            pixel["dx"] = (Math.rand() % 10 - 5) / 2; // Augmenter la vitesse en x
+            pixel["dy"] = (Math.rand() % 10 - 5) / 2; // Augmenter la vitesse en y
+            pixel["size"] = 5; // Augmenter la taille initiale
+            pixel["opacity"] = 255;
+            explosionPixels[i] = pixel;
+        }
     }
 
     function normalWatchFace(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
        
 
-        //var isStarsSky = Properties.getValue("StarsSky"); 
-        var isStarsSky = false; 
-
-
-        if (isStarsSky) {
-            // Mise à jour des positions des étoiles
-            updateStars();
-
-            // Dessiner les étoiles
-            drawStars(dc);
-        }
-        
         //Background Moon
         var Moon = WatchUi.loadResource(Rez.Drawables.whitemoon) ;
         dc.drawBitmap(center_x, center_y, Moon) ;
@@ -334,11 +345,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         if (isAdventureTheme(theme)) {
             dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT );
         } 
-
-        //dc.drawText(center_x, center_y - radius , Graphics.FONT_SYSTEM_MEDIUM, "12", Graphics.TEXT_JUSTIFY_CENTER);
-        //dc.drawText(center_x, center_y + radius * 0.75, Graphics.FONT_SYSTEM_MEDIUM, "6", Graphics.TEXT_JUSTIFY_CENTER);
-        //dc.drawText(center_x - radius * 0.93, center_y - radius * 0.13, Graphics.FONT_SYSTEM_MEDIUM, "9", Graphics.TEXT_JUSTIFY_CENTER);
-        //dc.drawText(center_x + radius * 0.93, center_y - radius * 0.13 , Graphics.FONT_SYSTEM_MEDIUM, "3", Graphics.TEXT_JUSTIFY_CENTER);
 
         for (var i = 0; i < 12; i++) {
             var hourText = (i == 0) ? "12" : i.toString(); // Afficher "12" pour l'heure 0
@@ -415,24 +421,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
         dc.drawText(center_x - radius * 0.65, center_y , Graphics.FONT_SYSTEM_XTINY,  System.getSystemStats().battery.toNumber() +"%", Graphics.TEXT_JUSTIFY_CENTER);
-
-
-        //Icone No Bluetooth
-        /*
-        var iconX = center_x;
-        var iconY = center_y + radius * 0.65;
-        var iconSize = 20;
-        var outlineWidthBluetooth = 2; // Épaisseur du contour noir
-
-        // Dessiner le contour noir du cercle
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.fillCircle(iconX, iconY, iconSize / 2 + outlineWidthBluetooth);
-
-        // Dessiner le cercle rouge par-dessus le contour
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        dc.fillCircle(iconX, iconY, iconSize / 2);
-        */
-        //Icon No Bluetooh
 
         //Basic Theme
         if (!isAdventureTheme(theme)) {
