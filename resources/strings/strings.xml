@@ -15,7 +15,7 @@
     <string id="NightModeEndTitle">Night Mode End</string>
     <string id="PictureNotificationTitle">Image when notification</string>
     <string id="PulsationNotificationTitle">Pulsation with bubble notification</string>
-
+        <string id="PicturePhoneNotConnectedTitle">Image when phone not connected</string>
 
 
     <string id="ColorBlack">Black</string>

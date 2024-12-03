@@ -13,4 +13,5 @@
     <property id="NightModeEnd" type="number">7</property>
     <property id="PictureNotification" type="boolean">false</property>
     <property id="PulsationNotification" type="boolean">false</property>
+    <property id="PicturePhoneNotConnected" type="boolean">false</property>
 </properties>

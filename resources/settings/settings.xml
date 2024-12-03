@@ -74,4 +74,8 @@
         <settingConfig type="boolean" />
     </setting>
 
+    <setting propertyKey="@Properties.PicturePhoneNotConnected" title="@Strings.PicturePhoneNotConnectedTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
 </settings>

@@ -91,6 +91,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         var pictureNotification = Properties.getValue("PictureNotification"); 
 
         var phoneConnected = System.getDeviceSettings().phoneConnected;
+        var picturePhoneNotConnected = Properties.getValue("PicturePhoneNotConnected");
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
@@ -170,7 +171,13 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                     }  
 
                     if (!phoneConnected)  {  
-                        normalLevelBatteryAndPhoneNotConnected(dc, center_x,center_y,radius,hour, min);
+                        if (picturePhoneNotConnected) {
+                            normalLevelBatteryAndPhoneNotConnected(dc, center_x,center_y,radius,hour, min);
+                        }
+                        if (!picturePhoneNotConnected) {
+                            normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            iconBluetooth(dc,center_x,center_y,radius);
+                        }
                     }  
 
                 }
@@ -203,6 +210,21 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
         isInSleepMode = true;
+    }
+
+    function iconBluetooth(dc, center_x,center_y,radius) {
+        //var pulsationNotification = Properties.getValue("PulsationNotification");
+        var iconX = center_x;
+        var iconY = center_y + radius * 0.65;
+        var iconSize = 20;
+        // Dessiner le contour noir du cercle
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2);
+
+        // Dessiner le cercle rouge par-dessus le contour
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.fillCircle(iconX, iconY, iconSize / 2);
+
     }
 
     function iconNotification(dc, center_x, center_y, radius) {
