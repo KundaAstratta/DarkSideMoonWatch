@@ -291,7 +291,25 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     }
 
     function normalWatchFace(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
-       
+        
+        var skystarsbackground = Properties.getValue("SkyStars");
+        if (skystarsbackground) {
+            // Backgroung night/blue
+            dc.setColor(Graphics.COLOR_TRANSPARENT, 0x000040); // Bleu nuit foncé
+            dc.clear();
+
+            // 2. Draw Stzrs
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT); // Étoiles blanches
+            var screenWidth = dc.getWidth();
+            var screenHeight = dc.getHeight();
+            var numStars = 50; 
+
+            for (var i = 0; i < numStars; i += 1) {
+                var starX = Math.rand() % screenWidth; 
+                var starY = Math.rand() % screenHeight;             
+                dc.fillCircle(starX, starY, 1); 
+            }
+        }
 
         //Background Moon
         var Moon = WatchUi.loadResource(Rez.Drawables.whitemoon) ;

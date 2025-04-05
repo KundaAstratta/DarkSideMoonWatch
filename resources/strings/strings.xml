@@ -4,6 +4,7 @@
 
     <string id="BackgroundColorTitle">Background Color</string>
     <string id="RedMoonTitle">Red Moon Background ?</string>
+    <string id="SkyStarsTitle">Stars in the night sky ?</string>
     <string id="ShowDateTitle">Show Date </string>
     <string id="DateColorTitle">Date Color</string>
     <string id="ThemeTitle">Theme</string>
@@ -15,7 +16,7 @@
     <string id="NightModeEndTitle">Night Mode End</string>
     <string id="PictureNotificationTitle">Image when notification</string>
     <string id="PulsationNotificationTitle">Pulsation with bubble notification</string>
-        <string id="PicturePhoneNotConnectedTitle">Image when phone not connected</string>
+    <string id="PicturePhoneNotConnectedTitle">Image when phone not connected</string>
 
 
     <string id="ColorBlack">Black</string>

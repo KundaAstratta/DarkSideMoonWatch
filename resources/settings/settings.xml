@@ -10,6 +10,10 @@
         <settingConfig type="boolean" />
     </setting>
 
+        <setting propertyKey="@Properties.SkyStars" title="@Strings.SkyStarsTitle">
+        <settingConfig type="boolean" />
+    </setting>
+
     <setting propertyKey="@Properties.Theme" title="@Strings.ThemeTitle">
         <settingConfig type="list">
             <listEntry value="1">@Strings.ThemeBasic</listEntry>
