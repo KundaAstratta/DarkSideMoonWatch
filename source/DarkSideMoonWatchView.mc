@@ -294,20 +294,24 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         
         var skystarsbackground = Properties.getValue("SkyStars");
         if (skystarsbackground) {
-            // Backgroung night/blue
+            // Background night/blue
             dc.setColor(Graphics.COLOR_TRANSPARENT, 0x000040); // Bleu nuit foncé
             dc.clear();
 
-            // 2. Draw Stzrs
+            // 2. Draw Stars with random sizes
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT); // Étoiles blanches
             var screenWidth = dc.getWidth();
             var screenHeight = dc.getHeight();
-            var numStars = 50; 
+            var numStars = 50; // Nombre d'étoiles, ajustez selon vos préférences
 
             for (var i = 0; i < numStars; i += 1) {
-                var starX = Math.rand() % screenWidth; 
-                var starY = Math.rand() % screenHeight;             
-                dc.fillCircle(starX, starY, 1); 
+                var starX = Math.rand() % screenWidth;  // Position X aléatoire
+                var starY = Math.rand() % screenHeight; // Position Y aléatoire
+                
+                // Génère 0 ou 1, puis ajoute 1 pour obtenir 1 ou 2 ou 3.
+                var starRadius = (Math.rand() % 3) + 1; 
+                // dc.fillCircle(starX, starY, 1); // Ancienne ligne avec taille fixe
+                dc.fillCircle(starX, starY, starRadius); // Nouvelle ligne avec taille aléatoire
             }
         }
 
