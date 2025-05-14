@@ -18,6 +18,7 @@
         <settingConfig type="list">
             <listEntry value="1">@Strings.ThemeBasic</listEntry>
             <listEntry value="2">@Strings.ThemeAdventure</listEntry>
+            <listEntry value="3">@Strings.ThemeColorOutOfSpace</listEntry>
         </settingConfig>
     </setting>
 

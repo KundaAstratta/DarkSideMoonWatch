@@ -30,6 +30,7 @@
 
     <string id="ThemeBasic">Basic</string>
     <string id="ThemeAdventure">Adventure</string>
+    <string id="ThemeColorOutOfSpace">Color Out Of Space</string> 
 
     <string id="Hours5">05h00</string>
     <string id="Hours6">06h00</string>
