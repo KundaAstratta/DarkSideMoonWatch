@@ -363,6 +363,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 4) {
+                dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150, 210);
 
@@ -400,6 +403,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
             }
         } 
 
@@ -440,6 +446,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 }
                 if (theme == 3) {
                     dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
+                }
+                if (theme == 4) {
+                    dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
                 }    
             }
             dc.drawText(textX, textY, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
@@ -466,6 +475,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00, 0x7FFF00);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,0xFF0000);
             }
         }
 
@@ -516,6 +528,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -531,6 +546,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
@@ -549,6 +567,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 4) {
+                dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -564,6 +585,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
@@ -656,6 +680,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 4) {
+                dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.setPenWidth(handWidth);
         dc.drawLine(
@@ -695,6 +722,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00,Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
             }
             dc.setPenWidth(3);
             dc.drawLine(
@@ -764,6 +794,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         if (theme == 3) {
             dc.setColor(0x7FFF00,Graphics.COLOR_TRANSPARENT);
         }
+        if (theme == 4) {
+            dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+        }
         dc.setPenWidth(6);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(hour_angle), 
@@ -828,6 +861,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         if (theme == 3) {
             dc.setColor(0x7FFF00,Graphics.COLOR_TRANSPARENT);
         }
+        if (theme == 4) {
+            dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+        }
         dc.setPenWidth(6);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(minute_angle), 
@@ -854,6 +890,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         }
         if (theme == 3) {
             dc.setColor(0x7FFF00,Graphics.COLOR_TRANSPARENT);
+        }
+        if (theme == 4) {
+            dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
         }
         dc.fillCircle(
             center_x ,
@@ -1098,6 +1137,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                     if (theme == 3) {
                         dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
                     }
+                    if (theme == 4) {
+                        dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+                    }
                 }
                 dc.setPenWidth(4); // Épaisseur des tiretsf
                 dc.drawLine(startX, startY, endX, endY);
@@ -1144,6 +1186,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 3) {
                 dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 4) {
+                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.setPenWidth(fillWidth);
