@@ -150,6 +150,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 //An other theme 
                 if (!isBasicTheme(theme)) {
                     drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
+                    if (theme == 4) {
+                        drawHourandMinutesHandAdventureNight(dc,center_x,center_y,radius,hour_angle,minute_angle);
+                    }
                 }
 
             }
@@ -508,6 +511,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         //Other theme
         if (!isBasicTheme(theme)) {
             drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
+            if (theme == 4) {
+                drawHourandMinutesHandAdventureNight(dc,center_x,center_y,radius,hour_angle,minute_angle);
+            }
         }
         //draw seconde hand only for adventure theme
         //Other theme
@@ -929,7 +935,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         );   
     }
 
-        function drawHourandMinutesHandAdventureNight(dc, center_x, center_y, radius, hour_angle, minute_angle) {
+    function drawHourandMinutesHandAdventureNight(dc, center_x, center_y, radius, hour_angle, minute_angle) {
         // Draw hour hand with black outline
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.setPenWidth(12);
