@@ -21,6 +21,11 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     //theme
     var theme = 1;
 
+    private var _centerX as Number = 0;
+    private var _centerY as Number = 0;
+    private var _radius as Number = 0;
+    private var _radiusMarkers as Number = 0;
+
     function initialize() {
         WatchFace.initialize();
     }
@@ -40,6 +45,12 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
+        _centerX = dc.getWidth() / 2 ;
+        _centerY = dc.getHeight() / 2 ;
+        _radius = (_centerX < _centerY ? _centerX : _centerY) - 20;
+        _radiusMarkers = dc.getWidth() /2;
+
+
         setLayout(Rez.Layouts.WatchFace(dc));
     }
 
@@ -78,7 +89,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         //today and moon phase
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var moonNumber = getMoonPhase(today.year, ((today.month)-1), today.day); 
+        //var moonNumber = getMoonPhase(today.year, ((today.month)-1), today.day); 
 
         
         var notificationCount = System.getDeviceSettings().notificationCount;
@@ -162,7 +173,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 if (battery >=20) {  
 
                     if (!notificationExist && phoneConnected)  {   
-                        normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                        //normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                        normalWatchFace(dc, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+
                     }
                     
                     if (notificationExist && phoneConnected)  {  
@@ -170,7 +183,8 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                             normalLevelBatteryAndNotificationExistAndPhoneConnected(dc, center_x,center_y,radius,hour, min);
                         }
                         if (!pictureNotification) {
-                            normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            //normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            normalWatchFace(dc, center_x,center_y,radius,hour_angle,minute_angle,today,sec);  
                             iconNotification(dc, center_x,center_y,radius);
                         }
                     }  
@@ -180,7 +194,8 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                             normalLevelBatteryAndPhoneNotConnected(dc, center_x,center_y,radius,hour, min);
                         }
                         if (!picturePhoneNotConnected) {
-                            normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            //normalWatchFace(dc,moonNumber, center_x,center_y,radius,hour_angle,minute_angle,today,sec);
+                            normalWatchFace(dc, center_x,center_y,radius,hour_angle,minute_angle,today,sec);       
                             iconBluetooth(dc,center_x,center_y,radius);
                         }
                     }  
@@ -296,12 +311,15 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         }
     }
 
-    function normalWatchFace(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
+    //function normalWatchFace(dc,moonNumber,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
+    function normalWatchFace(dc,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
         
         var skystarsbackground = Properties.getValue("SkyStars");
         if (skystarsbackground) {
             // Background night/blue
             dc.setColor(Graphics.COLOR_TRANSPARENT, 0x000040); // Bleu nuit foncé
+            drawConcentricBackground(dc);
+            drawStarField(dc);
             dc.clear();
 
             // 2. Draw Stars with random sizes
@@ -337,7 +355,8 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         }
 
         //Moon phase
-        showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
+        //showMoonPhase(moonNumber, dc, center_x + center_x / 3 , center_y + center_y / 3);
+         drawMoonPhase(dc);
 
         // Top Arc
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT); // Contour noir en premier
@@ -459,12 +478,14 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         
         //Date
         var isShowDate = Properties.getValue("ShowDate"); 
-        var DateColor = Properties.getValue("DateColor") ; 
+        //var DateColor = Properties.getValue("DateColor") ; 
 
         if (isShowDate) {
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-            dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
-            dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);   
+            //dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
+            //dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
+            //dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);  
+            drawCurvedMonth(dc);
+            drawSystemInfo(dc); 
         }     
 
         //Second Right Arc ; seconds
@@ -1201,6 +1222,213 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.drawLine(startX, startY, endX, endY);
     }
 
+    // NOUVELLE FONCTION : pour dessiner background
+     private function drawConcentricBackground(dc as Dc) as Void {
+        // Couleurs du dégradé du plus foncé au plus clair
+        var colors = [
+            0x000510, // Centre: Bleu très très sombre
+            0x000A18,
+            0x001020,
+            0x001528,
+            0x001A30,
+            0x002038,
+            0x002540,
+            0x003048,
+            0x003550,
+            0x004060  // Extérieur: Bleu nuit plus clair
+        ];
+        var maxRadius = _radius + 20;
+        var numRings = colors.size();
+        
+        // Dessiner les cercles concentriques du plus grand au plus petit
+        for (var i = numRings - 1; i >= 0; i--) {
+            var ringRadius = maxRadius * (i + 1) / numRings;
+            dc.setColor(colors[i], Graphics.COLOR_TRANSPARENT);
+            dc.fillCircle(_centerX, _centerY, ringRadius);
+        }
+    }
+
+    private function drawStarField(dc as Dc) as Void {
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+
+        // Vous pouvez ajuster le nombre d'étoiles ici
+        var numStars = 200;
+        var width = dc.getWidth();
+        var height = dc.getHeight();
+
+        // Utilise une graine (seed) constante pour que le champ d'étoiles soit
+        // identique à chaque appel. C'est un simple générateur pseudo-aléatoire.
+        var seed = 1;
+
+        for (var i = 0; i < numStars; i++) {
+            // Génère une coordonnée X pseudo-aléatoire
+            seed = (seed * 1664525 + 1013904223) & 0x7FFFFFFF;
+            var x = seed % width;
+
+            // Génère une coordonnée Y pseudo-aléatoire
+            seed = (seed * 1664525 + 1013904223) & 0x7FFFFFFF;
+            var y = seed % height;
+
+            // Fait varier la taille des étoiles pour un effet plus naturel
+            // 30% des étoiles seront un peu plus grandes.
+            seed = (seed * 1664525 + 1013904223) & 0x7FFFFFFF;
+            var size = (seed % 10 > 7) ? 2 : 1;
+
+            dc.fillCircle(x, y, size);
+        }
+    }
+
+
+
+
+    //NOUVELLE FONCTION pour dessiner le mois en suivant une courbe
+    private function drawCurvedMonth(dc as Dc) as Void {
+        // NOUVEAU : Tableau des noms des mois en anglais
+        var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+        // On récupère les informations de date avec le mois en tant que NUMÉRO (1-12)
+        var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        var monthNumber = today.month;
+
+        // On sélectionne le nom du mois en anglais dans notre tableau
+        // (on soustrait 1 car les tableaux commencent à l'index 0)
+        var monthString = monthNames[monthNumber - 1];
+
+        // Le reste de la fonction est inchangé et dessinera le mot anglais
+        var font = Graphics.FONT_XTINY;
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        var DateColor = Properties.getValue("DateColor") ; 
+        dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);
+
+        var textRadius = _radiusMarkers - 28;
+        var anglePerChar = 0.12; 
+        var totalAngle = monthString.length() * anglePerChar;
+        var centerAngle = (2.0 / 24.0) * Math.PI * 2 - Math.PI / 2;
+        var startAngle = centerAngle - (totalAngle / 2.0);
+
+        for (var i = 0; i < monthString.length(); i++) {
+            var charAngle = startAngle + (i * anglePerChar);
+            var char = monthString.substring(i, i + 1);
+
+            var x = _centerX + textRadius * Math.cos(charAngle);
+            var y = _centerY + textRadius * Math.sin(charAngle);
+
+            dc.drawText(x, y, font, char, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
+    }
+
+    // NOUVELLE FONCTION pour dessiner la date et l'icône de batterie en courbe
+    private function drawSystemInfo(dc as Dc) as Void {
+        // --- 1. Dessin de la date en courbe avec espacement ---
+        var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+        var dayString = today.day.format("%02d");
+
+        var font = Graphics.FONT_XTINY;
+        var DateColor = Properties.getValue("DateColor");
+        dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);
+
+        var textRadius = _radiusMarkers - 28;
+        
+        // Espacement de base entre les centres des caractères
+        var baseSpacing = 0.12; 
+        // NOUVEAU : Espace supplémentaire à ajouter
+        var extraSpaceAngle = 0.02; // Ajustez cette valeur pour plus/moins d'espace
+
+        // L'angle de la position centrale (4h30) reste notre référence
+        var centerAngle = (3.5 / 24.0) * Math.PI * 2 - Math.PI / 2;
+        
+        // L'écart total entre les centres des deux chiffres sera la somme des espacements
+        var totalSpacing = baseSpacing + extraSpaceAngle;
+
+        // Calculer l'angle pour chaque chiffre en se basant sur le centre
+        var tensAngle = centerAngle - (totalSpacing / 2.0);
+        var unitsAngle = centerAngle + (totalSpacing / 2.0);
+
+        // Dessiner le premier chiffre (dizaines)
+        var tensChar = dayString.substring(0, 1);
+        var x1 = _centerX + textRadius * Math.cos(tensAngle);
+        var y1 = _centerY + textRadius * Math.sin(tensAngle);
+        dc.drawText(x1, y1, font, tensChar, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        
+        // Dessiner le second chiffre (unités)
+        var unitsChar = dayString.substring(1, 2);
+        var x2 = _centerX + textRadius * Math.cos(unitsAngle);
+        var y2 = _centerY + textRadius * Math.sin(unitsAngle);
+        dc.drawText(x2, y2, font, unitsChar, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+
+    }
+
+    // NOUVELLE FONCTION : pour dessiner la phase de la Lune  
+     private function drawMoonPhase(dc as Dc) as Void {
+        //var settings = System.getDeviceSettings();
+        //_hasNotifications = settings.notificationCount > 0;
+        
+        //if (_hasNotifications) {
+            // Position de la lune
+            var moonX = _centerX + _centerX / 2;
+            var moonY = _centerY + _centerY / 2;  
+            var moonRadius = 28; 
+   
+            // Calcul de la phase de la Lune (formule plus fiable)
+            var today = Time.now();
+            var dateInfo = Gregorian.info(today, Time.FORMAT_SHORT);
+            
+            // Calcul du jour julien
+            var year = dateInfo.year;
+            var month = dateInfo.month;
+            var day = dateInfo.day;
+            
+            var ye = year;
+            var m = month;
+            if (month <= 2) {
+                ye = ye - 1;
+                m = m + 12;
+            }
+            var a = Math.floor(ye / 100);
+            var b = 2 - a + Math.floor(a / 4);
+            var julianDay = Math.floor(365.25 * (ye + 4716)) + Math.floor(30.6001 * (m + 1)) + day + b - 1524.5;
+            
+            // Phase de la lune (0 = Nouvelle Lune, 1 = Pleine Lune)
+            var lunarDaysSinceNewMoon = (julianDay - 2451550.1).toFloat(); // Jour julien de la Nouvelle Lune de janvier 2000
+            var phase = lunarDaysSinceNewMoon / 29.530588853;
+            phase = phase - Math.floor(phase);
+
+
+            // Dessiner l'ombre de la lune
+            var shadowColor = 0x001133;
+            
+            // Dessiner un cercle blanc pour la lune
+            dc.setColor(shadowColor, Graphics.COLOR_TRANSPARENT);
+            dc.fillCircle(moonX, moonY, moonRadius);
+            
+           
+            // Calculer le décalage de l'ombre pour un effet de croissant
+            var shadowOffset = Math.cos(phase * Math.PI * 2);
+            
+            // L'ombre est plus foncée au milieu du cycle (croissant/décroissant)
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            
+            // Dessiner la partie ombragée
+            for (var y = -moonRadius; y <= moonRadius; y++) {
+                var x = Math.sqrt(moonRadius * moonRadius - y * y);
+                var xOffset = x * shadowOffset;
+                
+                // Si la phase est croissante
+                if (phase <= 0.5) {
+                    dc.drawLine(moonX + xOffset.toNumber(), moonY + y, moonX + x.toNumber(), moonY + y);
+                } 
+                // Si la phase est décroissante
+                else {
+                    dc.drawLine(moonX - x.toNumber(), moonY + y, moonX - xOffset.toNumber(), moonY + y);
+                }
+            }
+            dc.setColor(0xFF8C00, Graphics.COLOR_TRANSPARENT); // Orange
+            dc.setPenWidth(2);
+            //dc.drawCircle(moonX, moonY, moonRadius);
+        //}
+    }
+
+/*
     function showMoonPhase(moonNumber,dc,x,y) {
         if (moonNumber == 0) {
             var newMoon = WatchUi.loadResource(Rez.Drawables.newMoon) ;
@@ -1244,6 +1472,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
     }
 
+*/
 
     function getMoonPhase(year, month, day) {
 
@@ -1280,6 +1509,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
       return (b).toNumber();
     }
 
+
      /*
      0 => New Moon
      1 => Waxing Crescent Moon
@@ -1290,6 +1520,5 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
      6 => Last Quarter Moon
      7 => Waning Crescent Moon
      */
-
 
 }
