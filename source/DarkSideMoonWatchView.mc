@@ -58,7 +58,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        isInSleepMode = false;
+        //isInSleepMode = false;
     }
 
     // Update the view
@@ -156,12 +156,15 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (isInSleepMode) {
                 //Basic Theme
                 if (isBasicTheme(theme)) {
+                    drawStarField(dc);
                     drawHourandMinutesHand(dc,center_x,center_y,radius,hour_angle,minute_angle);
                 }
                 //An other theme 
                 if (!isBasicTheme(theme)) {
+                    drawStarField(dc);
                     drawHourandMinutesHandAdventure(dc,center_x,center_y,radius,hour_angle,minute_angle);
                     if (theme == 4) {
+                        drawStarField(dc);
                         drawHourandMinutesHandAdventureNight(dc,center_x,center_y,radius,hour_angle,minute_angle);
                     }
                 }
@@ -226,11 +229,13 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
         isInSleepMode = false;
+        WatchUi.requestUpdate();
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
         isInSleepMode = true;
+        WatchUi.requestUpdate();
     }
 
     function iconBluetooth(dc, center_x,center_y,radius) {
@@ -1423,7 +1428,7 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
                 }
             }
             dc.setColor(0xFF8C00, Graphics.COLOR_TRANSPARENT); // Orange
-            dc.setPenWidth(2);
+            dc.setPenWidth(5);
             //dc.drawCircle(moonX, moonY, moonRadius);
         //}
     }
