@@ -89,8 +89,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         //today and moon phase
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        //var moonNumber = getMoonPhase(today.year, ((today.month)-1), today.day); 
-
         
         var notificationCount = System.getDeviceSettings().notificationCount;
         var notificationExist = false;
@@ -327,21 +325,6 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             drawStarField(dc);
             dc.clear();
 
-            // 2. Draw Stars with random sizes
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT); // Étoiles blanches
-            var screenWidth = dc.getWidth();
-            var screenHeight = dc.getHeight();
-            var numStars = 50; // Nombre d'étoiles, ajustez selon vos préférences
-
-            for (var i = 0; i < numStars; i += 1) {
-                var starX = Math.rand() % screenWidth;  // Position X aléatoire
-                var starY = Math.rand() % screenHeight; // Position Y aléatoire
-                
-                // Génère 0 ou 1, puis ajoute 1 pour obtenir 1 ou 2 ou 3.
-                var starRadius = (Math.rand() % 3) + 1; 
-                // dc.fillCircle(starX, starY, 1); // Ancienne ligne avec taille fixe
-                dc.fillCircle(starX, starY, starRadius); // Nouvelle ligne avec taille aléatoire
-            }
         }
 
         //Background Moon
@@ -354,9 +337,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         }
 
         // Dessiner les tirets pour les heures spécifiées
-        var isShowMinuteMarkers = Properties.getValue("ShowMinuteMarkers"); 
-        if (isShowMinuteMarkers) {
-            drawHourMarkers(dc, center_x, center_y, radius);
+        var isShowMarkers = Properties.getValue("ShowMarkers"); 
+        if (isShowMarkers) {
+            // MODIFICATION: Appel de la nouvelle fonction sans les anciens arguments
+            drawHourMarkers(dc);
         }
 
         //Moon phase
@@ -418,77 +402,11 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         dc.drawArc(center_x, center_y, radius * 0.74, Graphics.ARC_COUNTER_CLOCKWISE, 240, 300);
         dc.drawArc(center_x, center_y, radius * 0.77, Graphics.ARC_COUNTER_CLOCKWISE, 250, 290);
 
-        // Numbers (avec contour noir pour 3 et 6)
-        var outlineWidth = 1; // Épaisseur du contour noir
-        var numbersWithOutline = [3, 6];
-
-        //Numbers
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);         
-        if (!isBasicTheme(theme)) {
-            if (theme == 2) {
-                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-            }
-            if (theme == 3) {
-                dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
-            }
-            if (theme == 4) {
-                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
-            }
-        } 
-
-        for (var i = 0; i < 12; i++) {
-            var hourText = (i == 0) ? "12" : i.toString(); // Afficher "12" pour l'heure 0
-            var angle = ((i % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
-            var textX = 0; 
-            var textY = 0;
-
-            if (i == 0) { // 12 en haut
-                textX = center_x;
-                textY = center_y - radius;
-            } else if (i == 3) { // 3 à droite
-                textX = center_x + radius * 0.93;
-                textY = center_y - radius * 0.13;
-            } else if (i == 6) { // 6 en bas
-                textX = center_x;
-                textY = center_y + radius * 0.75;
-            } else if (i == 9) { // 9 à gauche
-                textX = center_x - radius * 0.93;
-                textY = center_y - radius * 0.13;
-            }
-
-            // Dessiner le contour noir si l'heure est dans numbersWithOutline
-            if (numbersWithOutline.indexOf(i) != -1) {
-                dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(textX + outlineWidth, textY - outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(textX - outlineWidth, textY + outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(textX + outlineWidth, textY + outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(textX - outlineWidth, textY - outlineWidth, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
-            }
-
-            // Dessiner le texte de l'heure par-dessus le contour
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            if (!isBasicTheme(theme)) {
-                if (theme == 2) {
-                    dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-                }
-                if (theme == 3) {
-                    dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
-                }
-                if (theme == 4) {
-                    dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
-                }    
-            }
-            dc.drawText(textX, textY, Graphics.FONT_SYSTEM_MEDIUM, hourText, Graphics.TEXT_JUSTIFY_CENTER);
-        }
-        
         //Date
         var isShowDate = Properties.getValue("ShowDate"); 
         //var DateColor = Properties.getValue("DateColor") ; 
 
         if (isShowDate) {
-            //dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);  
-            //dc.setColor(DateColor, Graphics.COLOR_TRANSPARENT);  
-            //dc.drawText(center_x + radius * 0.6, center_y + radius * 0.50 , Graphics.FONT_SYSTEM_SMALL, today.day.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);  
             drawCurvedMonth(dc);
             drawSystemInfo(dc); 
         }     
@@ -1129,102 +1047,65 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         return false;
     }
 
-    // Nouvelle fonction pour dessiner les tirets
-    function drawHourMarkers(dc, center_x, center_y, radius) {
-        var markerHours = [1, 2, 4, 5, 7, 8, 10, 11]; // Heures avec tirets principaux
-        var mainMarkerLength = 0.10 * radius; // Longueur des tirets principaux
-        var smallMarkerLength = 0.025 * radius; // Longueur des petits tirets
-        var markerOffset = 0.95 * radius; // Distance du centre 
-        var mainMarkers = Properties.getValue("MainMarkers");
-
-        // Dessiner les tirets pour toutes les heures et les petits tirets entre eux
-        for (var hour = 0; hour < 12; hour++) {
-            var angle = ((hour % 12) / 12.0) * TWO_PI - ANGLE_ADJUST;
-
-
-            // Dessiner le contour noir pour le tiret principal
-            if (markerHours.indexOf(hour) != -1) {
-                drawMarkerWithOutline(dc, center_x, center_y, markerOffset, angle, mainMarkerLength, 6, 4);
-            }
-
-            // Dessiner les contours noirs pour les petits tirets entre les heures
-            if (!mainMarkers) {
-                for (var j = 1; j < 5; j++) {
-                    var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
-                    drawMarkerWithOutline(dc, center_x, center_y, markerOffset, smallMarkerAngle, smallMarkerLength, 6, 4);
-                }
-            } 
-
-            // Dessiner le tiret principal si l'heure est dans markerHours
-            if (markerHours.indexOf(hour) != -1) {
-                var startX = center_x + markerOffset * Math.cos(angle);
-                var startY = center_y + markerOffset * Math.sin(angle);
-                var endX = center_x + (markerOffset - mainMarkerLength) * Math.cos(angle);
-                var endY = center_y + (markerOffset - mainMarkerLength) * Math.sin(angle);
-                dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-                if (!isBasicTheme(theme)) {
-                    if (theme == 2) {
-                        dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-                    } 
-                    if (theme == 3) {
-                        dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
-                    }
-                    if (theme == 4) {
-                        dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
-                    }
-                }
-                dc.setPenWidth(4); // Épaisseur des tiretsf
-                dc.drawLine(startX, startY, endX, endY);
-            }
-
-            // Dessiner les petits tirets entre les heures
-            if (!mainMarkers) {
-                for (var j = 1; j < 5; j++) {
-                    var smallMarkerAngle = angle + j * (TWO_PI / 60);  // Ajustement de l'incrément pour les petits tirets
-                    var smallStartX = center_x + markerOffset * Math.cos(smallMarkerAngle);
-                    var smallStartY = center_y + markerOffset * Math.sin(smallMarkerAngle);
-                    var smallEndX = center_x + (markerOffset - smallMarkerLength) * Math.cos(smallMarkerAngle);
-                    var smallEndY = center_y + (markerOffset - smallMarkerLength) * Math.sin(smallMarkerAngle);
-
-                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                    if (!isBasicTheme(theme)) {   
-                        dc.setColor(0x999999, Graphics.COLOR_TRANSPARENT);
-                    }
-                    dc.setPenWidth(4); // Épaisseur des tirets
-                    dc.drawLine(smallStartX, smallStartY, smallEndX, smallEndY);
-                }
+    //
+    // NOUVELLE FONCTION drawHourMarkers REMPLACÉE CI-DESSOUS
+    //
+    private function drawHourMarkers(dc as Dc) as Void {
+        dc.setColor(0xFFD700, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(1);
+        
+        var outerRadius = _radiusMarkers - 5;
+        var innerRadius = _radiusMarkers - 20; // Allongé de 15 à 20 (5 pixels de plus)
+        
+        // Dessiner les traits d'heures
+        for (var i = 0; i < 24; i++) {
+            var angle = (i * Math.PI * 2) / 24 - Math.PI / 2;
+            var cos = Math.cos(angle);
+            var sin = Math.sin(angle);
+            
+            var x1 = _centerX + outerRadius * cos;
+            var y1 = _centerY + outerRadius * sin;
+            var x2 = _centerX + innerRadius * cos;
+            var y2 = _centerY + innerRadius * sin;
+            
+            dc.drawLine(x1, y1, x2, y2);
+            
+            // Ajouter 3 points entre ce trait et le suivant
+            dc.setColor(0xFFD700, Graphics.COLOR_TRANSPARENT); // Couleur or pour les points
+            for (var j = 1; j <= 3; j++) {
+                // Calculer l'angle pour chaque point (répartition égale)
+                var nextHourAngle = ((i + 1) * Math.PI * 2) / 24 - Math.PI / 2;
+                var pointAngle = angle + (nextHourAngle - angle) * j / 4;
+                
+                var pointCos = Math.cos(pointAngle);
+                var pointSin = Math.sin(pointAngle);
+                
+                // Position des points (plus près du bord extérieur)
+                var pointRadius = _radiusMarkers - 8;
+                var pointX = _centerX + pointRadius * pointCos;
+                var pointY = _centerY + pointRadius * pointSin;
+                
+                // Dessiner le point
+                dc.fillCircle(pointX, pointY, 1);
             }
         }
-    }
+        
+        // Numéros des heures principales
+        // Lit le paramètre utilisateur pour déterminer les labels
+        //var isInverted = Application.getApp().getProperty("invertDisplay");
 
-    // Fonction pour dessiner un tiret avec un contour noir
-    function drawMarkerWithOutline(dc, centerX, centerY, offset, angle, length, outlineWidth, fillWidth) {
-        // Calculer les points de départ et de fin du tiret
-        var startX = centerX + offset * Math.cos(angle);
-        var startY = centerY + offset * Math.sin(angle);
-        var endX = centerX + (offset - length) * Math.cos(angle);
-        var endY = centerY + (offset - length) * Math.sin(angle);
+        var topLabel = "12";
+        var bottomLabel = "6";
+        var leftLabel = "9";
+        var rightLabel = "3";
 
-        // Dessiner le contour noir
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.setPenWidth(outlineWidth);
-        dc.drawLine(startX, startY, endX, endY);
+        // Dessine les labels en fonction de la condition
+        dc.setColor(0xFFD700, Graphics.COLOR_TRANSPARENT);  
+        dc.drawText(_centerX, _centerY - _radiusMarkers * 0.92, Graphics.FONT_XTINY, topLabel, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(_centerX, _centerY + _radiusMarkers * 0.78, Graphics.FONT_XTINY, bottomLabel, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(_centerX - _radiusMarkers * 0.86, _centerY - _radiusMarkers * 0.08, Graphics.FONT_XTINY, leftLabel, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(_centerX + _radiusMarkers * 0.86, _centerY - _radiusMarkers * 0.08, Graphics.FONT_XTINY, rightLabel, Graphics.TEXT_JUSTIFY_CENTER);
 
-        // Dessiner le tiret intérieur coloré
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        if (!isBasicTheme(theme)) {
-            if (theme == 2) {
-                dc.setColor(0xAA5500, Graphics.COLOR_TRANSPARENT);
-            }
-            if (theme == 3) {
-                dc.setColor(0x7FFF00, Graphics.COLOR_TRANSPARENT);
-            }
-            if (theme == 4) {
-                dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
-            }
-        }
-        dc.setPenWidth(fillWidth);
-        dc.drawLine(startX, startY, endX, endY);
     }
 
     // NOUVELLE FONCTION : pour dessiner background
@@ -1432,98 +1313,5 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             //dc.drawCircle(moonX, moonY, moonRadius);
         //}
     }
-
-/*
-    function showMoonPhase(moonNumber,dc,x,y) {
-        if (moonNumber == 0) {
-            var newMoon = WatchUi.loadResource(Rez.Drawables.newMoon) ;
-            dc.drawBitmap(x, y, newMoon) ;
-        }
-
-        if (moonNumber == 1) {
-            var waxingCrescent = WatchUi.loadResource(Rez.Drawables.waxingCrescent) ;
-            dc.drawBitmap(x, y, waxingCrescent) ;
-        }
-
-        if (moonNumber == 2) {
-            var firstQuarter = WatchUi.loadResource(Rez.Drawables.firstQuarter) ;
-            dc.drawBitmap(x, y, firstQuarter) ;
-        }
-
-        if (moonNumber == 3) {
-            var waxingGibbous = WatchUi.loadResource(Rez.Drawables.waxingGibbous) ;
-            dc.drawBitmap(x, y, waxingGibbous) ;
-        }
-
-        if (moonNumber == 4) {
-            var fullMoon = WatchUi.loadResource(Rez.Drawables.fullMoon) ;
-            dc.drawBitmap(x, y, fullMoon) ;
-        }
-
-        if (moonNumber == 5) {
-            var waningGibbous = WatchUi.loadResource(Rez.Drawables.waningGibbous) ;
-            dc.drawBitmap(x, y, waningGibbous) ;
-        }
-
-        if (moonNumber == 6) {
-            var thirdQuarter = WatchUi.loadResource(Rez.Drawables.thirdQuarter) ;
-            dc.drawBitmap(x, y, thirdQuarter) ;
-        }
-
-        if (moonNumber == 7) {
-            var waningCrescent = WatchUi.loadResource(Rez.Drawables.waningCrescent) ;
-            dc.drawBitmap(x, y, waningCrescent) ;
-        }
-
-    }
-
-*/
-
-    function getMoonPhase(year, month, day) {
-
-      var c=0;
-      var e=0;
-      var jd=0;
-      var b=0;
-
-      if (month < 3) {
-        year--;
-        month += 12;
-      }
-
-      ++month; 
-
-      c = 365.25 * year;
-
-      e = 30.6 * month;
-
-      jd = c + e + day - 694039.09; 
-
-      jd /= 29.5305882; 
-
-      b = (jd).toNumber(); 
-
-      jd -= b; 
-
-      b = Math.round(jd * 8); 
-
-      if (b >= 8) {
-        b = 0; 
-      }
-     
-      return (b).toNumber();
-    }
-
-
-     /*
-     0 => New Moon
-     1 => Waxing Crescent Moon
-     2 => Quarter Moon
-     3 => Waxing Gibbous Moon
-     4 => Full Moon
-     5 => Waning Gibbous Moon
-     6 => Last Quarter Moon
-     7 => Waning Crescent Moon
-     */
 
 }

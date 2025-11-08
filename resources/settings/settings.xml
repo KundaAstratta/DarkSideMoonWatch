@@ -27,11 +27,7 @@
         <settingConfig type="boolean" />
     </setting>
 
-   <setting propertyKey="@Properties.ShowMinuteMarkers" title="@Strings.ShowMinuteMarkersTitle">
-        <settingConfig type="boolean" />
-    </setting>
-
-    <setting propertyKey="@Properties.MainMarkers" title="@Strings.MainMarkersTitle">
+   <setting propertyKey="@Properties.ShowMarkers" title="@Strings.ShowMarkersTitle">
         <settingConfig type="boolean" />
     </setting>
 
