@@ -30,4 +30,4 @@ class DarkSideMoonWatchApp extends Application.AppBase {
 
 function getApp() as DarkSideMoonWatchApp {
     return Application.getApp() as DarkSideMoonWatchApp;
-}@
+}

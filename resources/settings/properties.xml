@@ -1,5 +1,4 @@
 <properties>
-
     <property id="BackgroundColor" type="number">0x000000</property>
     <property id="RedMoon" type="boolean">false</property>
     <property id="SkyStars" type="boolean">false</property>

@@ -20,6 +20,7 @@
             <listEntry value="2">@Strings.ThemeAdventure</listEntry>
             <listEntry value="3">@Strings.ThemeColorOutOfSpace</listEntry>
             <listEntry value="4">@Strings.ThemeRedSithLightsaber</listEntry>
+            <listEntry value="5">@Strings.ThemeGolden</listEntry>
         </settingConfig>
     </setting>
 
