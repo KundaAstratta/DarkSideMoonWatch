@@ -7,6 +7,8 @@ import Toybox.Time;
 import Toybox.Time.Gregorian;
 
 class DarkSideMoonWatchView extends WatchUi.WatchFace {
+    // paramétrage
+    const IS_FAKE_PARAM = false;
     // Variables pour l'animation de pulsation (à l'extérieur de la fonction)
     var pulseSize = 0;
     var pulseDirection = 1; // 1 pour augmenter, -1 pour diminuer
@@ -108,6 +110,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         var battery = System.getSystemStats().battery;
 
         theme = Properties.getValue("Theme");
+        if (IS_FAKE_PARAM == true) {
+            theme = 5;
+        }
 
 
         //TEST
@@ -318,6 +323,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     function normalWatchFace(dc,center_x,center_y,radius,hour_angle,minute_angle, today, sec) {
         
         var skystarsbackground = Properties.getValue("SkyStars");
+        // IS_FAKE_PARAM
+        if (IS_FAKE_PARAM == true) {
+            skystarsbackground = true;
+        }
         if (skystarsbackground) {
             // Background night/blue
             dc.setColor(Graphics.COLOR_TRANSPARENT, 0x000040); // Bleu nuit foncé
@@ -338,6 +347,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
 
         // Dessiner les tirets pour les heures spécifiées
         var isShowMarkers = Properties.getValue("ShowMarkers"); 
+        // IS_FAKE_PARAM
+        if (IS_FAKE_PARAM == true) {
+            isShowMarkers = true;
+        }
         if (isShowMarkers) {
             // MODIFICATION: Appel de la nouvelle fonction sans les anciens arguments
             drawHourMarkers(dc);
@@ -376,6 +389,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 4) {
                 dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.drawArc(center_x, center_y, radius * 0.8, Graphics.ARC_COUNTER_CLOCKWISE, 150, 210);
@@ -425,6 +441,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 4) {
                 dc.setColor(0xFF0000,0xFF0000);
+            }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,0xFFD700);
             }
         }
 
@@ -481,6 +500,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 4) {
                 dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -499,6 +521,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 4) {
                 dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
@@ -520,6 +545,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 4) {
                 dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
     }
@@ -538,6 +566,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 4) {
                 dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
             }
         }
         dc.drawText(center_x, center_y , Graphics.FONT_SYSTEM_MEDIUM, hour.format("%02d")+":"+min.format("%02d"), Graphics.TEXT_JUSTIFY_CENTER);
@@ -633,6 +664,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             if (theme == 4) {
                 dc.setColor(0xFF0000, Graphics.COLOR_TRANSPARENT);
             }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
+            }
         }
         dc.setPenWidth(handWidth);
         dc.drawLine(
@@ -657,6 +691,10 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
     // Draw second here
     function drawSecondHandAdventure(dc, center_x, center_y, radius, seconde_angle) {
         var isAdventureSecondHand = Properties.getValue("AdventureSecondHand"); 
+        // IS_FAKE_PARAM
+        if (IS_FAKE_PARAM == true) {
+            isAdventureSecondHand = true;
+        }
         if (isAdventureSecondHand) {
             // Dessiner une ligne noire derrière l'aiguille des secondes
             dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
@@ -675,6 +713,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
             }
             if (theme == 4) {
                 dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+            }
+            if (theme == 5) {
+                dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
             }
             dc.setPenWidth(3);
             dc.drawLine(
@@ -747,6 +788,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         if (theme == 4) {
             dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
         }
+        if (theme == 5) {
+            dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
+        }
         dc.setPenWidth(6);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(hour_angle), 
@@ -814,6 +858,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         if (theme == 4) {
             dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
         }
+        if (theme == 5) {
+            dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
+        }
         dc.setPenWidth(6);
         dc.drawLine(
             center_x + radius * 0.20 * Math.cos(minute_angle), 
@@ -843,6 +890,9 @@ class DarkSideMoonWatchView extends WatchUi.WatchFace {
         }
         if (theme == 4) {
             dc.setColor(0xFF0000,Graphics.COLOR_TRANSPARENT);
+        }
+        if (theme == 5) {
+            dc.setColor(0xFFD700,Graphics.COLOR_TRANSPARENT);
         }
         dc.fillCircle(
             center_x ,
